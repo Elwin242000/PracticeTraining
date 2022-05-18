@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<querys>
+		<query name="CodeMgmtDBDAOCheckDuplicateRSQL">
+			<desc><![CDATA[Check Duplicate Cd_ID]]></desc>
+			<sql><![CDATA[
+select count(intg_cd_id)
+from com_intg_cd
+where intg_cd_id = @[intg_cd_id]			]]></sql>
+			<params>
+				<param name="intg_cd_id" type="12" value="" out="N"/>
+			</params>
+		</query>
+	</querys>
+</sqls>

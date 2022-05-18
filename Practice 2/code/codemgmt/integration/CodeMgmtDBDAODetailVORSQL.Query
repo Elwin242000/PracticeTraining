@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<querys>
+		<query name="CodeMgmtDBDAODetailVORSQL">
+			<desc><![CDATA[DESC Enter..]]></desc>
+			<sql><![CDATA[
+select
+	intg_cd_id, 
+    intg_cd_val_ctnt, 
+    intg_cd_val_dp_desc, 
+    intg_cd_val_desc, 
+    intg_cd_val_dp_seq,
+    cre_usr_id,
+    upd_usr_id
+from com_intg_cd_dtl
+where 1 = 1
+#if (${intg_cd_id} != '') 
+and intg_cd_id like @[intg_cd_id]
+#end			]]></sql>
+			<params>
+				<param name="intg_cd_id" type="12" value="" out="N"/>
+			</params>
+		</query>
+	</querys>
+</sqls>

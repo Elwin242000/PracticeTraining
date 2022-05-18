@@ -1,0 +1,62 @@
+/*=========================================================
+ *Copyright(c) 2022 CyberLogitec
+ *@FileName : CarrierMgmtBC.java
+ *@FileTitle : Carrier Management
+ *Open Issues :
+ *Change history :
+ *@LastModifyDate : 2022.05.16
+ *@LastModifier : 
+ *@LastVersion : 1.0
+ * 2022.05.16
+ * 1.0 Creation
+=========================================================*/
+package com.clt.apps.opus.esm.clv.practice4.carriermgmt.basic;
+
+import java.util.List;
+
+import com.clt.apps.opus.esm.clv.practice4.carriermgmt.vo.CarrierVO;
+import com.clt.framework.core.layer.event.EventException;
+import com.clt.framework.support.view.signon.SignOnUserAccount;
+
+/**
+ * ALPS-Practice4 Business Logic Command Interface<br>
+ * - Interface to business logic for ALPS-Practice4<br>
+ *
+ * @author Truong Vu
+ * @since J2EE 1.6
+ */
+public interface CarrierMgmtBC {
+	/**
+	 * [searchCarrierCarrierMgmt] to get a list of Carrier.<br>
+	 * 
+	 * @param CarrierVO	carrierVO
+	 * @return List<CarrierVO>
+	 * @exception EventException
+	 */
+	public List<CarrierVO> searchCarrierCarrierMgmt(CarrierVO carrierVO) throws EventException;
+	
+	/**
+	 * [searchCarrierCombo] to get a list of Carrier for Combo box.<br>
+	 * 
+	 * @return List<CarrierVO>
+	 * @exception EventException
+	 */
+	public List<CarrierVO> searchCarrierCombo() throws EventException;
+	
+	/**
+	 * [searchLaneCombo] to get a list of Lane for Combo box.<br>
+	 * 
+	 * @return List<CarrierVO>
+	 * @exception EventException
+	 */
+	public List<CarrierVO> searchLaneCombo() throws EventException;
+	
+	/**
+	 * [manageCarrierCarrierMgmt] to save the change(add, delete, update) in database.<br>
+	 * 
+	 * @param CarrierVO[] carrierVO
+	 * @param account SignOnUserAccount
+	 * @exception EventException
+	 */
+	public void manageCarrierCarrierMgmt(CarrierVO[] carrierVO, SignOnUserAccount account) throws EventException;
+}

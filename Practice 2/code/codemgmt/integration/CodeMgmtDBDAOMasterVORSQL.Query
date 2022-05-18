@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<querys>
+		<query name="CodeMgmtDBDAOMasterVORSQL">
+			<desc><![CDATA[DESC Enter..]]></desc>
+			<sql><![CDATA[
+select 
+    ownr_sub_sys_cd, 
+    intg_cd_id, 
+    intg_cd_nm, 
+    intg_cd_len, 
+    intg_cd_tp_cd, 
+    mng_tbl_nm, 
+    intg_cd_desc, 
+    intg_cd_use_flg, 
+    cre_usr_id, 
+    cre_dt,
+    upd_usr_id, 
+	upd_dt
+from com_intg_cd
+where 1 = 1
+#if (${ownr_sub_sys_cd} != '') 
+and ownr_sub_sys_cd like '%'||@[ownr_sub_sys_cd]||'%'
+#end
+#if (${intg_cd_id} != '') 
+and	intg_cd_id like '%'||@[intg_cd_id]|| '%'
+#end			]]></sql>
+			<params>
+				<param name="ownr_sub_sys_cd" type="12" value="" out="N"/>
+				<param name="intg_cd_id" type="12" value="" out="N"/>
+			</params>
+		</query>
+	</querys>
+</sqls>
