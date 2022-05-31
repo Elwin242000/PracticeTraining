@@ -1,13 +1,13 @@
 /*=========================================================
 *Copyright(c) 2022 CyberLogitec
-*@FileName : CarrierMgmtDBDAOCheckDuplicateJoCrrCdRSQL.java
+*@FileName : CarrierMgmtDBDAOSearchCustomerRSQL.java
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2022.05.27
+*@LastModifyDate : 2022.05.25
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2022.05.27 
+* 2022.05.25 
 * 1.0 Creation
 =========================================================*/
 package com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration;
@@ -23,7 +23,7 @@ import com.clt.framework.support.db.ISQLTemplate;
  * @since J2EE 1.6
  */
 
-public class CarrierMgmtDBDAOCheckDuplicateJoCrrCdRSQL implements ISQLTemplate{
+public class CarrierMgmtDBDAOSearchCustomerRSQL implements ISQLTemplate{
 
 	private StringBuffer query = new StringBuffer();
 	
@@ -37,28 +37,12 @@ public class CarrierMgmtDBDAOCheckDuplicateJoCrrCdRSQL implements ISQLTemplate{
 	  * DESC Enter..
 	  * </pre>
 	  */
-	public CarrierMgmtDBDAOCheckDuplicateJoCrrCdRSQL(){
+	public CarrierMgmtDBDAOSearchCustomerRSQL(){
 		setQuery();
 		params = new HashMap<String,String[]>();
-		String tmp = null;
-		String[] arrTmp = null;
-		tmp = java.sql.Types.VARCHAR + ",N";
-		arrTmp = tmp.split(",");
-		if(arrTmp.length !=2){
-			throw new IllegalArgumentException();
-		}
-		params.put("jo_crr_cd",new String[]{arrTmp[0],arrTmp[1]});
-
-		tmp = java.sql.Types.VARCHAR + ",N";
-		arrTmp = tmp.split(",");
-		if(arrTmp.length !=2){
-			throw new IllegalArgumentException();
-		}
-		params.put("rlane_cd",new String[]{arrTmp[0],arrTmp[1]});
-
 		query.append("/*").append("\n"); 
 		query.append("Path : com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration").append("\n"); 
-		query.append("FileName : CarrierMgmtDBDAOCheckDuplicateJoCrrCdRSQL").append("\n"); 
+		query.append("FileName : CarrierMgmtDBDAOSearchCustomerRSQL").append("\n"); 
 		query.append("*/").append("\n"); 
 	}
 	
@@ -74,10 +58,12 @@ public class CarrierMgmtDBDAOCheckDuplicateJoCrrCdRSQL implements ISQLTemplate{
 	 * Query 생성
 	 */
 	public void setQuery(){
-		query.append("select count(jo_crr_cd) " ).append("\n"); 
-		query.append("from joo_carrier " ).append("\n"); 
-		query.append("where jo_crr_cd = @[jo_crr_cd]" ).append("\n"); 
-		query.append("	 and rlane_cd = @[rlane_cd]" ).append("\n"); 
+		query.append("select " ).append("\n"); 
+		query.append("	cust_cnt_cd," ).append("\n"); 
+		query.append("	cust_seq," ).append("\n"); 
+		query.append("	cust_lgl_eng_nm," ).append("\n"); 
+		query.append("	cust_abbr_nm" ).append("\n"); 
+		query.append("from mdm_customer" ).append("\n"); 
 
 	}
 }

@@ -28,14 +28,14 @@ import com.clt.framework.support.controller.html.FormCommand;
  * - Convert the parsing information into Event, put it in the request and request execution with Practice4SC<br>
  * - Set EventResponse to request to send execution result from Practice4SC to View (JSP)<br>
  * @author Truong Vu
- * @see See Practice3Event
+ * @see See Practice4Event
  * @since J2EE 1.6
  */
 public class PRACTICE_4HTMLAction extends HTMLActionSupport{
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * PRACTICE_1HTMLAction function constructor
+	 * PRACTICE_4HTMLAction function constructor
 	 */
 	public PRACTICE_4HTMLAction(){}
 	
@@ -61,6 +61,9 @@ public class PRACTICE_4HTMLAction extends HTMLActionSupport{
 		}
 		else if (command.isCommand(FormCommand.MULTI)){
 			event.setCarrierVOs((CarrierVO[])getVOs(request, CarrierVO.class, ""));
+		}
+		else if (command.isCommand(FormCommand.COMMAND01)){
+			event.setCarrierVO((CarrierVO)getVO(request, CarrierVO.class,""));
 		}
 		
 		return event;

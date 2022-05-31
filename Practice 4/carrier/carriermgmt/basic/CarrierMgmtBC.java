@@ -15,6 +15,7 @@ package com.clt.apps.opus.esm.clv.practice4.carriermgmt.basic;
 import java.util.List;
 
 import com.clt.apps.opus.esm.clv.practice4.carriermgmt.vo.CarrierVO;
+import com.clt.apps.opus.esm.clv.practice4.carriermgmt.vo.CustomerVO;
 import com.clt.framework.core.layer.event.EventException;
 import com.clt.framework.support.view.signon.SignOnUserAccount;
 
@@ -59,4 +60,22 @@ public interface CarrierMgmtBC {
 	 * @exception EventException
 	 */
 	public void manageCarrierCarrierMgmt(CarrierVO[] carrierVO, SignOnUserAccount account) throws EventException;
+	
+	/**
+	 * [searchCustomer] to get a list of Customer.<br>
+	 * 
+	 * @param CustomerVO	customerVO
+	 * @return List<CustomerVO>
+	 * @exception EventException
+	 */
+	public List<CustomerVO> searchCustomer(CustomerVO customerVO) throws EventException; 
+	
+	/**
+	 * [checkDuplicateInput] to check duplicate input.<br>
+	 * 
+	 * @param CarrierVO	carrierVO
+	 * @return int
+	 * @exception EventException
+	 */
+	public int checkDuplicateInput(CarrierVO carrierVO) throws EventException;
 }

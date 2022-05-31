@@ -44,7 +44,9 @@ function logKey(key){
 	}
 }
 
-//{processButtonClick} function for branching to the corresponding logic when a button on the screen is pressed
+/*
+ * function for branching to the corresponding logic when a button on the screen is pressed
+ */
 function processButtonClick(){
 	var sheetObject1=sheetObjects[0];
     var formObject=document.form;
@@ -84,14 +86,16 @@ function processButtonClick(){
     }
 }
 
-//{setSheetObject} to put sheet objects in global variable "sheetObjects"
-
+/*
+ * function to put sheet objects in global variable "sheetObjects"
+ */
 function setSheetObject(sheet_obj){
 	sheetObjects[sheetCnt++]=sheet_obj;
 }
-
-//{loadPage} functions that calls a common function that sets the default settings of the sheet
-// It is the first called area when fire jsp onload event
+/*
+ * functions that calls a common function that sets the default settings of the sheet
+ * It is the first called area when fire jsp onload event
+ */
 function loadPage() {
 	for(i=0;i<sheetObjects.length;i++){
 		// Set the basic design of the sheet. This function must be called before sheet initialization. (CoObject.js)
@@ -105,7 +109,9 @@ function loadPage() {
 	doActionIBSheet(sheetObjects[0],document.form,IBSEARCH);
 }
 
-//{initSheet} functions that define the basic properties of the sheet on the screen
+/*
+ * functions that define the basic properties of the sheet on the screen
+ */
 function initSheet(sheetObj,sheetNo) {
 	var cnt=0;
 	var sheetID=sheetObj.id;
@@ -148,13 +154,13 @@ function initSheet(sheetObj,sheetNo) {
                 // ComboCode 	 (String) : Combo list code group
                 // MultiLineText (Boolean): Whether to use multilines
                 var cols = [ 
-                    {Type:"Status", Hidden:1, Width:30, Align:"Center", ColMerge:0, SaveName:"ibflag" },
-                    {Type:"DelCheck", Hidden:0, Width:45, Align:"Center", ColMerge:0, SaveName:"DEL", KeyField:0, UpdateEdit:1, InsertEdit:1 },
-	                {Type:"Text", Hidden:0, Width:80, Align:"Center", ColMerge:1, SaveName:"err_msg_cd", KeyField:1, UpdateEdit:0, InsertEdit:1, EditLen: 8 },
-	                {Type:"Combo", Hidden:0, Width:80, Align:"Center", ColMerge:1, SaveName:"err_tp_cd", KeyField:1, UpdateEdit:1, InsertEdit:1, ComboText:"Server|UI|Both", ComboCode:"S|U|B" },
-	                {Type:"Combo", Hidden:0, Width:80, Align:"Center", ColMerge:1, SaveName:"err_lvl_cd", KeyField:1, UpdateEdit:1, InsertEdit:1, ComboText:"ERR|WARNING|INFO", ComboCode:"E|W|I" },
-	                {Type:"Text", Hidden:0, Width:400, Align:"Left", ColMerge:0, SaveName:"err_msg", KeyField:1, UpdateEdit:1, InsertEdit:1, MultiLineText:1 },
-	                {Type:"Text", Hidden:0, Width:250, Align:"Left", ColMerge:0, SaveName:"err_desc", KeyField:0, UpdateEdit:1, InsertEdit:1 } 
+                    {Type:"Status",   Hidden:1, Width:30,  Align:"Center", ColMerge:0, SaveName:"ibflag" },
+                    {Type:"DelCheck", Hidden:0, Width:45,  Align:"Center", ColMerge:0, SaveName:"DEL",        KeyField:0, UpdateEdit:1, InsertEdit:1 },
+	                {Type:"Text",     Hidden:0, Width:80,  Align:"Center", ColMerge:1, SaveName:"err_msg_cd", KeyField:1, UpdateEdit:0, InsertEdit:1, EditLen: 8 },
+	                {Type:"Combo",    Hidden:0, Width:80,  Align:"Center", ColMerge:1, SaveName:"err_tp_cd",  KeyField:1, UpdateEdit:1, InsertEdit:1, ComboText:"Server|UI|Both",   ComboCode:"S|U|B" },
+	                {Type:"Combo",    Hidden:0, Width:80,  Align:"Center", ColMerge:1, SaveName:"err_lvl_cd", KeyField:1, UpdateEdit:1, InsertEdit:1, ComboText:"ERR|WARNING|INFO", ComboCode:"E|W|I" },
+	                {Type:"Text",     Hidden:0, Width:400, Align:"Left",   ColMerge:0, SaveName:"err_msg",    KeyField:1, UpdateEdit:1, InsertEdit:1, MultiLineText:1 },
+	                {Type:"Text",     Hidden:0, Width:250, Align:"Left",   ColMerge:0, SaveName:"err_desc",   KeyField:0, UpdateEdit:1, InsertEdit:1 } 
 	            ];
                 // Configure data type, format and functionality of each column.
                 InitColumns(cols);
@@ -170,7 +176,9 @@ function resizeSheet(){
 	ComResizeSheet(sheetObjects[0]);
 }
 
-//{doActionIBSheet} functions that define transaction logic between UI and server
+/*
+ * functions that define transaction logic between UI and server
+ */
 function doActionIBSheet(sheetObj,formObj,sAction) {
 	switch(sAction) {
 		case IBSEARCH:
@@ -225,14 +233,6 @@ function doActionIBSheet(sheetObj,formObj,sAction) {
 			}
 			break;
     }
-}
-
-// handling event double click when double click one row in sheet
-function sheet1_OnDblClick(Row, Col, CellX, CellY, CellW, CellH){
-	var sheetObject1=sheetObjects[0];
-    var formObject=document.form;
-//    doActionIBSheet(sheetObject1,formObject,IBINSERT);
-    sheetObject1.DataInsert(Col+1);
 }
 
 //Handling validate
@@ -290,19 +290,4 @@ function sheet1_OnSaveEnd(Code, Msg){
 		ComShowCodeMessage('COM130103', sheetObjects[0].id);
 	}
 	
-}
-
-/**
- * @extends 
- * @class PRACTICE_1 : Defines the business script used in the screen for generating PRACTICE_1.
- */
-function PRACTICE_1() {
-    this.processButtonClick		= tprocessButtonClick;
-    this.setSheetObject 		= setSheetObject;
-    this.loadPage 				= loadPage;
-    this.initSheet 				= initSheet;
-    this.initControl            = initControl;
-    this.doActionIBSheet 		= doActionIBSheet;
-    this.setTabObject 			= setTabObject;
-    this.validateForm 			= validateForm;
 }

@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.clt.apps.opus.esm.clv.practice4.carriermgmt.vo.CarrierVO;
+import com.clt.apps.opus.esm.clv.practice4.carriermgmt.vo.CustomerVO;
 import com.clt.framework.component.message.ErrorHandler;
 import com.clt.framework.component.rowset.DBRowSet;
 import com.clt.framework.core.layer.integration.DAOException;
@@ -143,6 +144,42 @@ public class CarrierMgmtDBDAO extends DBDAOSupport {
 	}
 	
 	/**
+	 * [searchCustomer] to get a list of customer.<br>
+	 * 
+	 * @param CustomerVO customerVO
+	 * @return List<CustomerVO>
+	 * @exception DAOException
+	 */
+	@SuppressWarnings("unchecked")
+	public List<CustomerVO> searchCustomer(CustomerVO customerVO) throws DAOException {
+ 		DBRowSet dbRowset = null;
+		List<CustomerVO> list = new ArrayList();
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		
+		Map<String, Object> velParam = new HashMap<String, Object>();
+		
+		try{
+			if(customerVO != null){
+				Map<String, String> mapVO = customerVO.getColumnValues();
+				param.putAll(mapVO);
+				velParam.putAll(mapVO);
+			}
+			dbRowset = new SQLExecuter("").executeQuery((ISQLTemplate)new CarrierMgmtDBDAOSearchCustomerRSQL(), param, velParam);
+			list = (List)RowSetUtil.rowSetToVOs(dbRowset, CustomerVO .class);
+		}
+		catch (SQLException se){
+			log.error(se.getMessage(), se);
+			throw new DAOException(new ErrorHandler(se).getMessage());
+		}
+		catch (Exception ex){
+			log.error(ex.getMessage(), ex);
+			throw new DAOException(new ErrorHandler(ex).getMessage());
+		}
+		return list;
+ 	}
+	
+	/**
 	 * [addmanageCarrierS] to add ErrMsgVOs.<br>
 	 * 
 	 * @param List<CarrierVO> carrierVO
@@ -251,13 +288,14 @@ public class CarrierMgmtDBDAO extends DBDAOSupport {
 	 * @exception DAOException
 	 * @exception Exception
 	 */
-	public int duplicateJoCrrCd(CarrierVO carrierVO) throws DAOException,Exception{
+	public int duplicateInput(CarrierVO carrierVO) throws DAOException,Exception{
 		DBRowSet dbRowset = null;
 		Map<String, Object> param = new HashMap<String, Object>();
 		int count = 0;
 		try{
 			Map<String, String> mapVO = carrierVO .getColumnValues();
-			param.put("jo_crr_cd",carrierVO.getJoCrrCd());
+//			param.put("jo_crr_cd",carrierVO.getJoCrrCd());
+			param.putAll(mapVO);
 			dbRowset = new SQLExecuter("").executeQuery((ISQLTemplate)new CarrierMgmtDBDAOCheckDuplicateJoCrrCdRSQL(), param, null);
 			while (dbRowset.next()){
 				String countE = dbRowset.getString(1);

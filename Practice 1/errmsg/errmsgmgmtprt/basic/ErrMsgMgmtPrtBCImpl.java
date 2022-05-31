@@ -66,7 +66,7 @@ public class ErrMsgMgmtPrtBCImpl extends BasicCommandSupport implements ErrMsgMg
 	 *  [checkDuplicateErrMsg] to check duplicate err_msg_cd.<br>
 	 * 
 	 * @param ErrMsgVO errMsgVO
-	 * @return List<ErrMsgVO>
+	 * @return int
 	 * @exception EventException
 	 */
 	public int checkDuplicateErrMsg(ErrMsgVO errMsgVO) throws EventException {
@@ -96,34 +96,46 @@ public class ErrMsgMgmtPrtBCImpl extends BasicCommandSupport implements ErrMsgMg
 			List<ErrMsgVO> updateVoList = new ArrayList<ErrMsgVO>();
 			// storage list ErrMsgVO to delete
 			List<ErrMsgVO> deleteVoList = new ArrayList<ErrMsgVO>();
+			// storage duplicate msg_cd
+			StringBuilder dups = new StringBuilder();
+			// count msg_cd duplicate
+			int count = 0;
 			
 			for ( int i=0; i<errMsgVO .length; i++ ) {
 				// Find and add new errMsgVO to insertVoList 
 				if ( errMsgVO[i].getIbflag().equals("I")){
 					//Check duplicate Msg_code
-//					if (!checkDuplicateMsgCd(errMsgVO[i], searchptErrMsg(null))){
-//						throw new DAOException(new ErrorHandler("ERR00001").getMessage());
-//					}
-//					else{
-//						insertVoList.add(errMsgVO[i]);
-//					}
 					if (checkDuplicateErrMsg(errMsgVO[i]) >= 1){
-						throw new DAOException(new ErrorHandler("ERR00001").getMessage());
+						dups.append("[" + errMsgVO[i].getErrMsgCd());
+						if (i < errMsgVO .length - 1){
+							dups.append("],");
+						}
+						if (i == errMsgVO.length - 1){
+							dups.append("]");
+						}
+						count++;
 					}
-					else {
-						insertVoList.add(errMsgVO[i]);
+					if (i == errMsgVO.length-1){
+						if (count > 0){
+							throw new DAOException(new ErrorHandler("ERR00011", new String[]{dups.toString(), dups.toString()}).getMessage());
+						}
+						else {
+							errMsgVO[i].setCreUsrId(account.getUsr_id());
+							errMsgVO[i].setUpdUsrId(account.getUsr_id());
+							insertVoList.add(errMsgVO[i]);
+						
+						}
 					}
 				} 
 				// Find and add new errMsgVO to updateVoList 
 				else if ( errMsgVO[i].getIbflag().equals("U")){
+					errMsgVO[i].setUpdUsrId(account.getUsr_id());
 					updateVoList.add(errMsgVO[i]);
 				} 
 				// Find and add new errMsgVO to deleteVoList 
 				else if ( errMsgVO[i].getIbflag().equals("D")){
 					deleteVoList.add(errMsgVO[i]);
-				}
-				errMsgVO[i].setCreUsrId(account.getUsr_id());
-				errMsgVO[i].setUpdUsrId(account.getUsr_id());
+				}	
 			}
 			//Validate Msg_Code (the first 3 characters are uppercase letters, the last 5 characters are numbers)
 //			for (ErrMsgVO serrMsgVO: errMsgVO){

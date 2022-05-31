@@ -17,6 +17,7 @@ import java.util.List;
 
 import com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration.CarrierMgmtDBDAO;
 import com.clt.apps.opus.esm.clv.practice4.carriermgmt.vo.CarrierVO;
+import com.clt.apps.opus.esm.clv.practice4.carriermgmt.vo.CustomerVO;
 import com.clt.framework.component.message.ErrorHandler;
 import com.clt.framework.core.layer.event.EventException;
 import com.clt.framework.core.layer.integration.DAOException;
@@ -98,24 +99,6 @@ public class CarrierMgmtBCImpl extends BasicCommandSupport implements CarrierMgm
 	}
 	
 	/**
-	 * [checkDuplicateJoCrrCd] to check duplicate jo_crr_cd.<br>
-	 * 
-	 * @param CarrierVO	carrierVO
-	 * @return int
-	 * @exception EventException
-	 */
-	public int checkDuplicateJoCrrCd(CarrierVO carrierVO) throws EventException {
-		try {
-			return dbDao.duplicateJoCrrCd(carrierVO);
-		} catch(DAOException ex) {
-			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
-		} catch (Exception ex) {
-			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
-		}
-		
-	}
-	
-	/**
 	 * [manageCarrierCarrierMgmt] to save the change(add, delete, update) in database.<br>
 	 * 
 	 * @param CarrierVO[] carrierVO
@@ -130,7 +113,7 @@ public class CarrierMgmtBCImpl extends BasicCommandSupport implements CarrierMgm
 			
 			for (int i = 0; i < carrierVO.length; i++){
 				if ( carrierVO[i].getIbflag().equals("I")){
-					if (checkDuplicateJoCrrCd(carrierVO[i]) >= 1){
+					if (checkDuplicateInput(carrierVO[i]) >= 1){
 						throw new DAOException(new ErrorHandler("ERR00001").getMessage());
 					}
 					else {
@@ -160,6 +143,42 @@ public class CarrierMgmtBCImpl extends BasicCommandSupport implements CarrierMgm
 			}
 		}
 		catch(DAOException ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
+		} catch (Exception ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
+		}
+	}
+	
+	/**
+	 * [searchCustomer] to get a list of Customer.<br>
+	 * 
+	 * @param CustomerVO	customerVO
+	 * @return List<CustomerVO>
+	 * @exception EventException
+	 */
+	public List<CustomerVO> searchCustomer(CustomerVO customerVO) throws EventException {
+		try{
+			return dbDao.searchCustomer(customerVO);
+		}
+		catch (DAOException ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(), ex);
+		}
+		catch (Exception ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(), ex);
+		}
+	}
+	
+	/**
+	 * [checkDuplicateInput] to check duplicate input.<br>
+	 * 
+	 * @param CarrierVO	carrierVO
+	 * @return int
+	 * @exception EventException
+	 */
+	public int checkDuplicateInput(CarrierVO carrierVO) throws EventException {
+		try {
+			return dbDao.duplicateInput(carrierVO);
+		} catch(DAOException ex) {
 			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
 		} catch (Exception ex) {
 			throw new EventException(new ErrorHandler(ex).getMessage(),ex);

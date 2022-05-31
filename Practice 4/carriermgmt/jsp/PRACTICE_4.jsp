@@ -56,9 +56,6 @@
 		loadPage();
 	}
 </script>
-<script language="javascript" type="text/javascript"
-	src="apps/opus/esm/clv/practice4/carriermgmt/script/comboObject.js"></script>
-
 <form name="form">
 	<input type="hidden" name="f_cmd"> <input type="hidden"
 		name="pagerows">
@@ -100,8 +97,7 @@
 						</script></td>
 
 						<th width="50">Vendor</th>
-						<td width="120"><input type="text" style="width: 120px;" onkeypress="return onlyNumberKey(event)"
-							class="input" value="" name="s_vndr_seq" id="s_vndr_seq"></td>
+						<td width="120"><input type="text" style="width: 120px;" class="input" value="" maxlength="6" dataformat="num" name="s_vndr_seq" id="s_vndr_seq"></td>
 
 						<th width="100">Create Date</th>
 						<td><input type="text" style="width: 120px; text-align: center;" name="s_cre_dt_fm" id="s_cre_dt_fm"><!--  

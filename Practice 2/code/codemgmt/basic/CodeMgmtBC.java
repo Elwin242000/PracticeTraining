@@ -62,4 +62,13 @@ public interface CodeMgmtBC {
 	 * @exception EventException
 	 */
 	public void manageDetailCodeMgmt(DetailVO[] detailVO, SignOnUserAccount account) throws EventException;
+	
+	/**
+	 *  [checkDuplicateErrMsg] to check duplicate err_msg_cd.<br>
+	 * 
+	 * @param ErrMsgVO errMsgVO
+	 * @return int
+	 * @exception EventException
+	 */
+	public int checkDuplicateCodeMgmt(MasterVO masterVO) throws EventException;
 }

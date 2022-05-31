@@ -44,4 +44,13 @@ public interface ErrMsgMgmtPrtBC {
 	 * @exception EventException
 	 */
 	public void manageptErrMsg(ErrMsgVO[] errMsgVO,SignOnUserAccount account) throws EventException;
+	
+	/**
+	 *  [checkDuplicateErrMsg] to check duplicate err_msg_cd.<br>
+	 * 
+	 * @param ErrMsgVO errMsgVO
+	 * @return int
+	 * @exception EventException
+	 */
+	public int checkDuplicateErrMsg(ErrMsgVO errMsgVO) throws EventException;
 }

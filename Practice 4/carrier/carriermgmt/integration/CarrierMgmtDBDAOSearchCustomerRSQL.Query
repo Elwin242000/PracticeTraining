@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<querys>
+		<query name="CarrierMgmtDBDAOSearchCustomerRSQL">
+			<desc><![CDATA[DESC Enter..]]></desc>
+			<sql><![CDATA[
+select 
+	cust_cnt_cd,
+	cust_seq,
+	cust_lgl_eng_nm,
+	cust_abbr_nm
+from mdm_customer			]]></sql>
+			<params>
+			</params>
+		</query>
+	</querys>
+</sqls>

@@ -86,7 +86,7 @@ public class CodeMgmtBCImpl extends BasicCommandSupport implements CodeMgmtBC {
 	 *  [checkDuplicateErrMsg] to check duplicate err_msg_cd.<br>
 	 * 
 	 * @param ErrMsgVO errMsgVO
-	 * @return List<ErrMsgVO>
+	 * @return int
 	 * @exception EventException
 	 */
 	public int checkDuplicateCodeMgmt(MasterVO masterVO) throws EventException {
