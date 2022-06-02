@@ -21,7 +21,9 @@ var comboValues = "";
 document.onclick=processButtonClick;
 document.onkeydown=logKey;
 
-
+/**
+ * function to set button enter
+ */
 function logKey(key){
 	var sheetObject1 = sheetObjects[0];
 	var formObj = document.form;
@@ -40,30 +42,22 @@ function processButtonClick() {
     try {
     	var srcName=ComGetEvent("name");
     	switch(srcName) {
+	    	case "btn_calendar_dt_fr":
+				 var calendar = new ComCalendar();
+				 calendar.select(formObject.s_cre_dt_fm, "yyyy-MM-dd");
+				 break;
+			case "btn_calendar_dt_to":
+				 var calendar = new ComCalendar();
+				 calendar.select(formObject.s_cre_dt_to, "yyyy-MM-dd");
+				 break;
     		case "btn_Retrieve":
 	        	doActionIBSheet(sheetObject1,formObject,IBSEARCH);
 	        	break;
-    		case "btn_Add":
-            	doActionIBSheet(sheetObject1,formObject,IBINSERT);
-            	break;
-    		case "btn_Delete":
-    			doActionIBSheet(sheetObject1,formObject,IBDELETE);
+    		case "btn_New":
+    			doActionIBSheet(sheetObject1,formObject,IBCLEAR);
     			break;
     		case "btn_Save":
     			doActionIBSheet(sheetObject1,formObject,IBSAVE);
-    			break;
-    		case "btn_calendar_dt_fr":
-    			 var calendar = new ComCalendar();
-    			 calendar.select(formObject.s_cre_dt_fm, "yyyy-MM-dd");
-    			 break;
-    		case "btn_calendar_dt_to":
-    			 var calendar = new ComCalendar();
-    			 calendar.select(formObject.s_cre_dt_to, "yyyy-MM-dd");
-    			 break;
-    		case "btn_New":
-    			resetSheet(sheetObject1,formObject);
-    			break;
-    		case "btn_Save":
     			break;
     		case "btn_DownExcel":
 				if (sheetObject1.RowCount() < 1) {
@@ -72,6 +66,12 @@ function processButtonClick() {
 					doActionIBSheet(sheetObject1,formObject,IBDOWNEXCEL);
 				}
 				break;
+    		case "btn_Add":
+            	doActionIBSheet(sheetObject1,formObject,IBINSERT);
+            	break;
+    		case "btn_Delete":
+    			doActionIBSheet(sheetObject1,formObject,IBDELETE);
+    			break;
     	}
     }
     catch(e) {
@@ -152,7 +152,7 @@ function initSheet(sheetObj,sheetNo) {
 			        {Type:"Popup",    Hidden:0, Width:50,  Align:"Center",  SaveName:"cust_cnt_cd", KeyField:1, UpdateEdit:1, InsertEdit:1, AcceptKeys : "E", InputCaseSensitive : 1, EditLen: 2}, 
 				    {Type:"Popup",    Hidden:0, Width:100, Align:"Center",  SaveName:"cust_seq",    KeyField:1, UpdateEdit:1, InsertEdit:1, AcceptKeys : "N", EditLen: 6}, 
 				    {Type:"Popup",    Hidden:0, Width:100, Align:"Center",  SaveName:"trd_cd",      KeyField:0, UpdateEdit:1, InsertEdit:1, AcceptKeys : "E", InputCaseSensitive : 1, EditLen: 3},
-				    {Type:"Combo",    Hidden:0, Width:70,  Align:"Center",  SaveName:"delt_flg",    KeyField:0, UpdateEdit:1, InsertEdit:1, ComboCode:"N|Y", ComboText:"N|Y"}, 
+				    {Type:"Combo",    Hidden:0, Width:70,  Align:"Center",  SaveName:"delt_flg",    KeyField:0, UpdateEdit:1, InsertEdit:1, ComboCode:"N|Y",  ComboText:"N|Y"}, 
 				    {Type:"Text",     Hidden:0, Width:200, Align:"Center",  SaveName:"cre_dt",      KeyField:0, UpdateEdit:0, InsertEdit:0}, 
 				    {Type:"Text",     Hidden:0, Width:200, Align:"Left",    SaveName:"cre_usr_id",  KeyField:0, UpdateEdit:0, InsertEdit:0}, 
 				    {Type:"Text",     Hidden:0, Width:200, Align:"Center",  SaveName:"upd_dt",      KeyField:0, UpdateEdit:0, InsertEdit:0}, 
@@ -211,6 +211,11 @@ function doActionIBSheet(sheetObj,formObj,sAction) {
 			else{
 				sheetObj.Down2Excel({DownCols: makeHiddenSkipCol(sheetObj), SheetDesign:1, Merge:1});
 			}
+			break;
+		case IBCLEAR:
+			formObj.reset();
+			sheetObj.RemoveAll();
+			s_carrier.SetSelectIndex(0);
 			break;
 	}
 }
@@ -299,18 +304,6 @@ function s_carrier_OnCheckClick(Index, Code, Checked) {
 }
 
 /**
- * Function to reset search option and sheet.
- * 
- * @param sheetObj
- * @param formObj
- */
-function resetSheet(sheetObj, formObj){
-	formObj.reset();
-	sheetObj.RemoveAll();
-	s_carrier.SetSelectIndex(0);
-}
-
-/**
  * Handling event after search.
  * 
  * @param sheetObj
@@ -345,8 +338,8 @@ function sheet1_OnBeforeSave(){
  * @param Code
  * @param Msg
  */
-function sheet1_OnSaveEnd(Code, Msg){
-	if (Msg >= 0){
+function sheet1_OnSaveEnd(sheetObj, Code, Msg){
+	if (Code >= 0){
 		if (flagAnnounce == 'Insert'){
 			ComShowCodeMessage('COM130102', sheetObjects[0].id);
 			flagAnnounce = null;
@@ -431,7 +424,7 @@ function sheet1_OnPopupClick(sheetObj,Row, Col){
 			ComOpenPopup('/opuscntr/CustomerPU.do', 800, 500, 'setCustCd', '1,0,1,1,1,1', true);
 			break;
 		case "vndr_seq":
-			ComOpenPopup('/opuscntr/COM_COM_0007.do', 900, 520, 'setVndrCd', '1,0,1', true, false, Row, Col);
+			ComOpenPopup('/opuscntr/COM_COM_0007.do', 900, 520, 'setVndrCd', '1,0,1', true, false);
 			break;
 		case "trd_cd":
 			ComOpenPopup('/opuscntr/COM_COM_0012.do', 800, 500, 'setTrdCd', '1,0,0,1,1,1,1,1', true);

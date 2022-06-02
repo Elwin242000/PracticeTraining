@@ -57,8 +57,8 @@
 	}
 </script>
 <form name="form">
-	<input type="hidden" name="f_cmd"> <input type="hidden"
-		name="pagerows">
+	<input type="hidden" name="f_cmd"> 
+	<input type="hidden" name="pagerows">
 
 	<div class="page_title_area clear">
 		<h2 class="page_title">
@@ -67,19 +67,10 @@
 			</button>
 		</h2>
 		<div class="opus_design_btn">
-			<button type="button" class="btn_accent" name="btn_Retrieve"
-				id="btn_Retrieve">Retrieve</button>
-			<!--
-				-->
-			<button type="button" class="btn_normal" name="btn_New" id="btn_New">New</button>
-			<!--
-				-->
-			<button type="button" class="btn_normal" name="btn_Save"
-				id="btn_Save">Save</button>
-			<!--
-				-->
-			<button type="button" class="btn_normal" name="btn_DownExcel"
-				id="btn_DownExcel">Down Excel</button>
+			<button type="button" class="btn_accent" name="btn_Retrieve" id="btn_Retrieve">Retrieve</button><!--
+			--><button type="button" class="btn_normal" name="btn_New" id="btn_New">New</button><!--
+			--><button type="button" class="btn_normal" name="btn_Save" id="btn_Save">Save</button><!--
+			--><button type="button" class="btn_normal" name="btn_DownExcel" id="btn_DownExcel">Down Excel</button>
 		</div>
 		<div class="location">
 			<span id="navigation"></span>
@@ -92,18 +83,24 @@
 				<tbody>
 					<tr>
 						<th width="50">Carrier</th>
-						<td width="120"><script type="text/javascript">
-							ComComboObject('s_carrier', 1, 120, 1, 0, 0);
-						</script></td>
+						<td width="120">
+							<script type="text/javascript">
+								ComComboObject('s_carrier', 1, 120, 1, 0, 0);
+							</script>
+						</td>
 
 						<th width="50">Vendor</th>
-						<td width="120"><input type="text" style="width: 120px;" class="input" value="" maxlength="6" dataformat="num" name="s_vndr_seq" id="s_vndr_seq"></td>
+						<td width="120">
+							<input type="text" style="width: 120px;" class="input" value="" maxlength="6" dataformat="num" name="s_vndr_seq" id="s_vndr_seq">
+						</td>
 
 						<th width="100">Create Date</th>
-						<td><input type="text" style="width: 120px; text-align: center;" name="s_cre_dt_fm" id="s_cre_dt_fm"><!--  
+						<td>
+							<input type="text" style="width: 120px; text-align: center;" name="s_cre_dt_fm" id="s_cre_dt_fm"><!--  
 							--><button type="button" class="calendar ir" name="btn_calendar_dt_fr" id="btn_calendar_dt_fr"></button> ~ 
 							<input type="text" style="width: 120px; text-align: center;" name="s_cre_dt_to" id="s_cre_dt_to"><!-- 
-							--><button type="button" class="calendar ir" name="btn_calendar_dt_to" id="btn_calendar_dt_to"></button></td>
+							--><button type="button" class="calendar ir" name="btn_calendar_dt_to" id="btn_calendar_dt_to"></button>
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -113,12 +110,8 @@
 	<div class="wrap_result">
 		<div class="opus_design_grid">
 			<div class="opus_design_btn">
-				<button type="button" class="btn_accent" name="btn_Delete"
-					id="btn_Delete">Row Delete</button>
-				<!-- 
-				-->
-				<button type="button" class="btn_accent" name="btn_Add" id="btn_Add">Row
-					Add</button>
+				<button type="button" class="btn_accent" name="btn_Delete" id="btn_Delete">Row Delete</button><!-- 
+				--><button type="button" class="btn_accent" name="btn_Add" id="btn_Add">RowAdd</button>
 			</div>
 			<script language="javascript">
 				ComSheetObject('sheet1');

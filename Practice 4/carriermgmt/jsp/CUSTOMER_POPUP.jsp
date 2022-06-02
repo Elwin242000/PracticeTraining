@@ -70,7 +70,7 @@
 						</td>
 						<th width="40">Sequence</th>
 						<td>
-							<input type="number" min=0 style="width:100px;" class="input" value="" name="s_cust_seq" id="s_cust_seq">
+							<input type="text" min=0 style="width:100px;" class="input" value="" name="s_cust_seq" id="s_cust_seq">
 						</td>
 					</tr> 
 				</tbody>
@@ -80,7 +80,9 @@
 
 	<div class="wrap_result">
 		<div class="opus_design_grid">
-			<script language="javascript">ComSheetObject('sheet1');</script>
+			<script language="javascript">
+				ComSheetObject('sheet1');
+			</script>
 		</div>	
 	</div>
 </form>
