@@ -1,3 +1,16 @@
+/*=========================================================
+ *Copyright(c) 2022 CyberLogitec
+ *@FileName : CustomerEvent.java
+ *@FileTitle : Customer Management
+ *Open Issues :
+ *Change history :
+ *@LastModifyDate : 2022.05.16
+ *@LastModifier : 
+ *@LastVersion : 1.0
+ * 2022.05.16
+ * 1.0 Creation
+=========================================================*/
+
 package com.clt.apps.opus.esm.clv.practice4.customer.event;
 
 import com.clt.apps.opus.esm.clv.practice4.carriermgmt.vo.CustomerVO;

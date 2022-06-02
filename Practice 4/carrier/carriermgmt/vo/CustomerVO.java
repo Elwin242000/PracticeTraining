@@ -4,10 +4,10 @@
 *@FileTitle : CustomerVO
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2022.05.25
+*@LastModifyDate : 2022.06.02
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2022.05.25  
+* 2022.06.02  
 * 1.0 Creation
 =========================================================*/
 

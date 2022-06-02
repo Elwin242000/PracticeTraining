@@ -4,10 +4,10 @@
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2022.05.25
+*@LastModifyDate : 2022.06.02
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2022.05.25 
+* 2022.06.02 
 * 1.0 Creation
 =========================================================*/
 package com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration;
@@ -40,6 +40,22 @@ public class CarrierMgmtDBDAOSearchCustomerRSQL implements ISQLTemplate{
 	public CarrierMgmtDBDAOSearchCustomerRSQL(){
 		setQuery();
 		params = new HashMap<String,String[]>();
+		String tmp = null;
+		String[] arrTmp = null;
+		tmp = java.sql.Types.VARCHAR + ",N";
+		arrTmp = tmp.split(",");
+		if(arrTmp.length !=2){
+			throw new IllegalArgumentException();
+		}
+		params.put("cust_seq",new String[]{arrTmp[0],arrTmp[1]});
+
+		tmp = java.sql.Types.VARCHAR + ",N";
+		arrTmp = tmp.split(",");
+		if(arrTmp.length !=2){
+			throw new IllegalArgumentException();
+		}
+		params.put("cust_cnt_cd",new String[]{arrTmp[0],arrTmp[1]});
+
 		query.append("/*").append("\n"); 
 		query.append("Path : com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration").append("\n"); 
 		query.append("FileName : CarrierMgmtDBDAOSearchCustomerRSQL").append("\n"); 
@@ -64,6 +80,13 @@ public class CarrierMgmtDBDAOSearchCustomerRSQL implements ISQLTemplate{
 		query.append("	cust_lgl_eng_nm," ).append("\n"); 
 		query.append("	cust_abbr_nm" ).append("\n"); 
 		query.append("from mdm_customer" ).append("\n"); 
+		query.append("where 1 = 1" ).append("\n"); 
+		query.append("#if (${cust_cnt_cd} != '')" ).append("\n"); 
+		query.append("and cust_cnt_cd like @[cust_cnt_cd]" ).append("\n"); 
+		query.append("#end" ).append("\n"); 
+		query.append("###if (${cust_seq} != '')" ).append("\n"); 
+		query.append("##and cust_seq like '%'||@[cust_seq]||'%'" ).append("\n"); 
+		query.append("###end" ).append("\n"); 
 
 	}
 }

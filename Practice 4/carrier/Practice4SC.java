@@ -195,7 +195,7 @@ public class Practice4SC extends ServiceCommandSupport {
 	 */
 	private EventResponse searchCustomer(Event e) throws EventException {
 		GeneralEventResponse eventResponse = new GeneralEventResponse();
-		CustomerEvent event = new CustomerEvent();
+		CustomerEvent event = (CustomerEvent)e;
 		CarrierMgmtBC command = new CarrierMgmtBCImpl();
 		
 		try{

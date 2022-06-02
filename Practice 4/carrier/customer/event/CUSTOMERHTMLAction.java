@@ -1,8 +1,21 @@
+/*=========================================================
+ *Copyright(c) 2022 CyberLogitec
+ *@FileName : CUSTOMERHTMLAction.java
+ *@FileTitle : Customer Management
+ *Open Issues :
+ *Change history :
+ *@LastModifyDate : 2022.05.16
+ *@LastModifier : 
+ *@LastVersion : 1.0
+ * 2022.05.16
+ * 1.0 Creation
+=========================================================*/
 package com.clt.apps.opus.esm.clv.practice4.customer.event;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.clt.apps.opus.esm.clv.practice4.carriermgmt.vo.CustomerVO;
+import com.clt.framework.component.util.JSPUtil;
 import com.clt.framework.core.controller.html.HTMLActionException;
 import com.clt.framework.support.controller.HTMLActionSupport;
 import com.clt.framework.support.controller.html.FormCommand;
@@ -30,8 +43,11 @@ public class CUSTOMERHTMLAction extends HTMLActionSupport {
     	FormCommand command = FormCommand.fromRequest(request);
 		CustomerEvent event = new CustomerEvent();
 		
-		if(command.isCommand(FormCommand.SEARCH)) {	
-			event.setCustomerVO((CustomerVO)getVO(request, CustomerVO.class,""));
+		if(command.isCommand(FormCommand.SEARCH)) {
+			CustomerVO customerVO = new CustomerVO();
+			customerVO.setCustCntCd(JSPUtil.getParameter(request, "s_cust_cnt_cd", ""));
+			customerVO.setCustSeq(JSPUtil.getParameter(request, "s_cust_seq",	""));
+			event.setCustomerVO(customerVO);
 		}
 		
 		return event;
