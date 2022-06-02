@@ -110,24 +110,38 @@ public class CarrierMgmtBCImpl extends BasicCommandSupport implements CarrierMgm
 			List<CarrierVO> insertVOList = new ArrayList<CarrierVO>();
 			List<CarrierVO> updateVOList = new ArrayList<CarrierVO>();
 			List<CarrierVO> deleteVOList = new ArrayList<CarrierVO>();
+			StringBuilder dups = new StringBuilder();
+			int count = 0;
 			
 			for (int i = 0; i < carrierVO.length; i++){
 				if ( carrierVO[i].getIbflag().equals("I")){
 					if (checkDuplicateInput(carrierVO[i]) >= 1){
-						throw new DAOException(new ErrorHandler("ERR00001").getMessage());
+						dups.append(carrierVO[i].getJoCrrCd() + "," + carrierVO[i].getRlaneCd());
+						if (i < carrierVO .length - 1){
+							dups.append("],[");
+						}
+						count++;
 					}
-					else {
-						insertVOList.add(carrierVO[i]);
+					if (i == carrierVO.length-1){
+						if (count > 0){
+							throw new DAOException(new ErrorHandler("ERR00001", new String[]{dups.toString()}).getMessage());
+						}
+						else {
+							carrierVO[i].setCreUsrId(account.getUsr_id());
+							carrierVO[i].setUpdUsrId(account.getUsr_id());
+							insertVOList.add(carrierVO[i]);
+						
+						}
 					}			
 				}
 				else if (carrierVO[i].getIbflag().equals("U")){
+					carrierVO[i].setUpdUsrId(account.getUsr_id());
 					updateVOList.add(carrierVO[i]);
 				}
 				else if (carrierVO[i].getIbflag().equals("D")){
 					deleteVOList.add(carrierVO[i]);
 				}
-				carrierVO[i].setCreUsrId(account.getUsr_id());
-				carrierVO[i].setUpdUsrId(account.getUsr_id());
+				
 			}
 			
 			if (insertVOList.size() > 0){

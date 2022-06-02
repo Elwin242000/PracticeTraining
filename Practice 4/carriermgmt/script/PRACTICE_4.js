@@ -356,6 +356,15 @@ function sheet1_OnSaveEnd(sheetObj, Code, Msg){
 	}
 	else {
 		ComShowCodeMessage('COM130103', sheetObjects[0].id);
+		var dupData = sheetObj.FindStatusRow("I");
+		var aRows = dupData.split(';');
+		for (var i = 0; i < aRows.length; i++){
+			if (Msg.includes(sheetObj.GetCellValue(aRows[i],"jo_crr_cd")) &&
+					Msg.includes(sheetObj.GetCellValue(aRows[i],"rlane_cd"))){
+				sheetObj.SetRowBackColor(aRows[i],"#FF6666");
+			}
+			console.log(aRows);
+		}
 	}
 	
 }
