@@ -2,10 +2,14 @@
 <%@ page import="com.clt.framework.component.util.JSPUtil"%>
 <%@ page import="com.clt.framework.component.util.DateTime"%>
 <%@ page import="com.clt.framework.component.message.ErrorHandler"%>
-<%@ page import="com.clt.framework.core.layer.event.GeneralEventResponse"%>
-<%@ page import="com.clt.framework.support.controller.html.CommonWebKeys"%>
-<%@ page import="com.clt.framework.support.view.signon.SignOnUserAccount"%>
-<%@ page import="com.clt.apps.opus.esm.clv.practice4.carriermgmt.event.Practice4Event"%>
+<%@ page
+	import="com.clt.framework.core.layer.event.GeneralEventResponse"%>
+<%@ page
+	import="com.clt.framework.support.controller.html.CommonWebKeys"%>
+<%@ page
+	import="com.clt.framework.support.view.signon.SignOnUserAccount"%>
+<%@ page
+	import="com.clt.apps.opus.esm.clv.practice4.carriermgmt.event.Practice4Event"%>
 <%@ page import="org.apache.log4j.Logger"%>
 
 <%
@@ -42,10 +46,10 @@
 	}
 %>
 <script language="javascript">
-	var carrierCombo = "ALL|<%=carrier%>";
-	var laneCombo = "|<%=lane%>";
-	function setupPage(){
-		var errMessage = "<%=strErrMsg%>";
+		var carrierCombo = "ALL|<%=carrier%>";
+		var laneCombo = "|<%=lane%>";
+		function setupPage(){
+			var errMessage = "<%=strErrMsg%>";
 		if (errMessage.length >= 1) {
 			ComShowMessage(errMessage);
 		} // end if
@@ -74,7 +78,7 @@
 	</div>
 
 	<div class="wrap_search">
-		<div class="opus_design_inquiry">
+		<div class="opus_design_inquiry wfit">
 			<table>
 				<tbody>
 					<tr>
@@ -106,8 +110,8 @@
 	<div class="wrap_result">
 		<div class="opus_design_grid">
 			<div class="opus_design_btn">
-				<button type="button" class="btn_accent" name="btn_Delete" id="btn_Delete">Row Delete</button><!-- 
-				--><button type="button" class="btn_accent" name="btn_Add" id="btn_Add">RowAdd</button>
+				<button type="button" class="btn_etc" name="btn_Delete" id="btn_Delete">Row Delete</button><!-- 
+				--><button type="button" class="btn_etc" name="btn_Add" id="btn_Add">RowAdd</button>
 			</div>
 			<script language="javascript">
 				ComSheetObject('sheet1');
