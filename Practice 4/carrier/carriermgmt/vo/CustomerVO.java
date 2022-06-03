@@ -237,10 +237,10 @@ public class CustomerVO extends AbstractValueObject {
 		CustomerVO model = null;
 		
 		String[] tmp = request.getParameterValues(prefix + "ibflag");
-  		if(tmp == null)
-   			return null;
+		if(tmp == null)
+			return null;
 
-  		int length = request.getParameterValues(prefix + "ibflag").length;
+		int length = request.getParameterValues(prefix + "ibflag").length;
   
 		try {
 			String[] ibflag = (JSPUtil.getParameter(request, prefix	+ "ibflag", length));
@@ -286,8 +286,8 @@ public class CustomerVO extends AbstractValueObject {
 	 * VO Class의 내용을 String으로 변환
 	 */
 	public String toString() {
-		   return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE );
-	   }
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE );
+	}
 
 	/**
 	* 포맷팅된 문자열에서 특수문자 제거("-","/",",",":")

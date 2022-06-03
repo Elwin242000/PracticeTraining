@@ -433,10 +433,10 @@ public class CarrierVO extends AbstractValueObject {
 		CarrierVO model = null;
 		
 		String[] tmp = request.getParameterValues(prefix + "ibflag");
-  		if(tmp == null)
-   			return null;
+		if(tmp == null)
+			return null;
 
-  		int length = request.getParameterValues(prefix + "ibflag").length;
+		int length = request.getParameterValues(prefix + "ibflag").length;
   
 		try {
 			String[] updDt =     (JSPUtil.getParameter(request, prefix + "upd_dt",      length));
@@ -509,8 +509,8 @@ public class CarrierVO extends AbstractValueObject {
 	 * Convert the contents of VO Class to String
 	 */
 	public String toString() {
-		   return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE );
-	   }
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE );
+	}
 
 	/**
 	* Remove special characters from formatted string ("-","/",",",":")

@@ -109,8 +109,8 @@ public class CarrierMgmtDBDAO extends DBDAOSupport {
 		catch(Exception ex) {
 			log.error(ex.getMessage(),ex);
 			throw new DAOException(new ErrorHandler(ex).getMessage());
-		 }
-		 return list;
+		}
+		return list;
 	}
 	
 	/**
@@ -127,7 +127,7 @@ public class CarrierMgmtDBDAO extends DBDAOSupport {
 		Map<String, Object> param = new HashMap<String, Object>();
 		//velocity parameter
 		Map<String, Object> velParam = new HashMap<String, Object>();
-		 
+
 		try{
 			dbRowset = new SQLExecuter("").executeQuery((ISQLTemplate)new CarrierMgmtDBDAOCarrierSearchLaneRSQL(), param, velParam);
 			list = (List)RowSetUtil.rowSetToVOs(dbRowset, CarrierVO .class);
@@ -139,8 +139,8 @@ public class CarrierMgmtDBDAO extends DBDAOSupport {
 		catch(Exception ex) {
 			log.error(ex.getMessage(),ex);
 			throw new DAOException(new ErrorHandler(ex).getMessage());
-		 }
-		 return list;
+		}
+		return list;
 	}
 	
 	/**
@@ -152,7 +152,7 @@ public class CarrierMgmtDBDAO extends DBDAOSupport {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<CustomerVO> searchCustomer(CustomerVO customerVO) throws DAOException {
- 		DBRowSet dbRowset = null;
+		DBRowSet dbRowset = null;
 		List<CustomerVO> list = new ArrayList();
 		
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -177,7 +177,7 @@ public class CarrierMgmtDBDAO extends DBDAOSupport {
 			throw new DAOException(new ErrorHandler(ex).getMessage());
 		}
 		return list;
- 	}
+	}
 	
 	/**
 	 * [addmanageCarrierS] to add ErrMsgVOs.<br>
