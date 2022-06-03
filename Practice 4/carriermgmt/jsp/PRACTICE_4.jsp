@@ -2,14 +2,10 @@
 <%@ page import="com.clt.framework.component.util.JSPUtil"%>
 <%@ page import="com.clt.framework.component.util.DateTime"%>
 <%@ page import="com.clt.framework.component.message.ErrorHandler"%>
-<%@ page
-	import="com.clt.framework.core.layer.event.GeneralEventResponse"%>
-<%@ page
-	import="com.clt.framework.support.controller.html.CommonWebKeys"%>
-<%@ page
-	import="com.clt.framework.support.view.signon.SignOnUserAccount"%>
-<%@ page
-	import="com.clt.apps.opus.esm.clv.practice4.carriermgmt.event.Practice4Event"%>
+<%@ page import="com.clt.framework.core.layer.event.GeneralEventResponse"%>
+<%@ page import="com.clt.framework.support.controller.html.CommonWebKeys"%>
+<%@ page import="com.clt.framework.support.view.signon.SignOnUserAccount"%>
+<%@ page import="com.clt.apps.opus.esm.clv.practice4.carriermgmt.event.Practice4Event"%>
 <%@ page import="org.apache.log4j.Logger"%>
 
 <%

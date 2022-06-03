@@ -50,19 +50,19 @@
 	<div class="layer_popup_title">
 		<div class="page_title_area clear">
 			<div class="opus_design_btn">
-			   <button type="button" class="btn_accent" name="btn_Retrieve" id="btn_Retrieve">Retrieve</button><!--
-			   --><button type="button" class="btn_normal" name="btn_OK" id="btn_Save">OK</button>
+				<button type="button" class="btn_accent" name="btn_Retrieve" id="btn_Retrieve">Retrieve</button><!--
+				--><button type="button" class="btn_normal" name="btn_OK" id="btn_Save">OK</button>
 			</div>
-		    <div class="location">
-		     	<span id="navigation"></span>
-		    </div>
+			<div class="location">
+				<span id="navigation"></span>
+			</div>
 		</div>
 	</div>
 	
 	<div class="wrap_search">
 		<div class="opus_design_inquiry">
-		    <table>
-		        <tbody>
+			<table>
+				<tbody>
 					<tr>
 						<th width="40">Country</th>
 						<td width="120">
