@@ -42,10 +42,10 @@
 	}
 %>
 <script language="javascript">
-		var carrierCombo = "ALL|<%=carrier%>";
-		var laneCombo = "|<%=lane%>";
-		function setupPage(){
-			var errMessage = "<%=strErrMsg%>";
+	var carrierCombo = "ALL|<%=carrier%>";
+	var laneCombo = "|<%=lane%>";
+	function setupPage(){
+		var errMessage = "<%=strErrMsg%>";
 		if (errMessage.length >= 1) {
 			ComShowMessage(errMessage);
 		} // end if
