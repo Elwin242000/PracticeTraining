@@ -51,10 +51,14 @@ function processButtonClick() {
 				 calendar.select(formObject.s_cre_dt_to, "yyyy-MM-dd");
 				 break;
     		case "btn_Retrieve":
+    			if (!checkCondition()){
+    				document.form.s_cre_dt_to.value = '';
+    				return;
+    			}
 	        	doActionIBSheet(sheetObject1,formObject,IBSEARCH);
 	        	break;
     		case "btn_New":
-    			doActionIBSheet(sheetObject1,formObject,IBCLEAR);
+    			doActionIBSheet(sheetObject1,formObject,IBRESET);
     			break;
     		case "btn_Save":
     			doActionIBSheet(sheetObject1,formObject,IBSAVE);
@@ -121,6 +125,7 @@ function setSheetObject(sheet_obj){
  */
 function initControl(){
 	document.getElementById('s_vndr_seq').addEventListener('keypress', function() {ComKeyOnlyNumber(this);});
+//	document.getElementById('s_cre_dt_to').addEventListener('change', function() {excuteCheck();});
 }
 
 
@@ -212,7 +217,7 @@ function doActionIBSheet(sheetObj,formObj,sAction) {
 				sheetObj.Down2Excel({DownCols: makeHiddenSkipCol(sheetObj), SheetDesign:1, Merge:1});
 			}
 			break;
-		case IBCLEAR:
+		case IBRESET:
 			formObj.reset();
 			sheetObj.RemoveAll();
 			s_carrier.SetSelectIndex(0);
@@ -227,6 +232,16 @@ function doActionIBSheet(sheetObj,formObj,sAction) {
  */
 function setComboObject(combo_obj) {
 	comboObjects[comboCnt++] = combo_obj;
+}
+
+function checkCondition(){
+	var formObj = document.form;
+	var fromDate = formObj.s_cre_dt_fm.value.replaceStr("-","");
+	var toDate   = formObj.s_cre_dt_to.value.replaceStr("-","");
+	console.log(ComGetDaysBetween(fromDate, toDate));
+	if (ComGetDaysBetween(fromDate, toDate) <= 0)
+		return false;
+	return true;
 }
 
 /**
@@ -302,6 +317,7 @@ function s_carrier_OnCheckClick(Index, Code, Checked) {
 	 }
 
 }
+
 
 /**
  * Handling event after search.
