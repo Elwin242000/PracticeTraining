@@ -40,17 +40,14 @@
 
 	try {
 		event = (Practice3Event) request.getAttribute("Event");
-		serverException = (Exception) request
-				.getAttribute(CommonWebKeys.EXCEPTION_OBJECT);
+		serverException = (Exception) request.getAttribute(CommonWebKeys.EXCEPTION_OBJECT);
 
 		if (serverException != null) {
-			strErrMsg = new ErrorHandler(serverException)
-					.loadPopupMessage();
+			strErrMsg = new ErrorHandler(serverException).loadPopupMessage();
 		}
 
 		// 초기화면 로딩시 서버로부터 가져온 데이터 추출하는 로직추가 ..
-		GeneralEventResponse eventResponse = (GeneralEventResponse) request
-				.getAttribute("EventResponse");
+		GeneralEventResponse eventResponse = (GeneralEventResponse) request.getAttribute("EventResponse");
 		partner = eventResponse.getETCData("partners");
 
 	} catch (Exception e) {
@@ -68,9 +65,6 @@
 		loadPage();
 	}
 </script>
-<script language="javascript" type="text/javascript" src="apps/opus/esm/clv/practice3/moneymgmt/script/tabObject.js"></script>
-<script language="javascript" type="text/javascript" src="apps/opus/esm/clv/practice3/moneymgmt/script/comboObject.js"></script>
-<script language="javascript" type="text/javascript" src="apps/opus/esm/clv/practice3/moneymgmt/script/calendar.js"></script>
 
 <form name="form">
 	<input type="hidden" name="f_cmd"> <input type="hidden"

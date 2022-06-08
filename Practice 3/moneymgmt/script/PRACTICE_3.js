@@ -86,20 +86,20 @@ function processButtonClick() {
 	        	break;
 	        case "btn_datefrom_up":
 	        	addMonth(formObject.acct_yrmon_from, 1);
-	        	excuteCheck();
 	        	yearmonth_onchange();
+	        	excuteCheck();
 	        	break;
 	        case "btn_dateto_down":
 	        	addMonth(formObject.acct_yrmon_to, -1);
-	        	excuteCheck();
 	        	yearmonth_onchange();
+	        	excuteCheck();
 	        	break;
 	        case "btn_dateto_up":
 	        	addMonth(formObject.acct_yrmon_to, 1);
 	        	yearmonth_onchange();
 	        	break;
 	        case "btn_New":
-	        	resetForm(formObject);
+	        	doActionIBSheet(sheetObject1,formObject,IBRESET);
 	        	break;
 	        case "btn_DownExcel":
             	doActionIBSheet(sheetObject1,formObject,IBDOWNEXCEL);
@@ -250,6 +250,9 @@ function doActionIBSheet(sheetObj,formObj,sAction) {
 				sheetObjects[0].Down2ExcelBuffer(false);
 			}
 			break;
+		case IBRESET:
+			resetForm(formObj);
+			break;
 	}
 }
 
@@ -268,7 +271,7 @@ function initPeriod(){
 	var formObj = document.form;
 	var ymTo = ComGetNowInfo("ym","-");
 	formObj.acct_yrmon_to.value = ymTo;
-	var ymFrom = ComGetDateAdd(formObj.acct_yrmon_to.value + "-01","M",-2);
+	var ymFrom = ComGetDateAdd(formObj.acct_yrmon_to.value + "-01","M",-1);
 	formObj.acct_yrmon_from.value = GetDateFormat(ymFrom,"ym");
 }
  //Get format date
@@ -306,8 +309,11 @@ function checkCondition(){
 
 //Excute check condition 
 function excuteCheck(){
+	formObj = document.form;
 	if (!checkCondition()){
-		initPeriod();
+		ComShowMessage("Date From is bigger than Date To.")
+		var ymFrom = ComGetDateAdd(formObj.acct_yrmon_to.value + "-01","M",-1);
+		formObj.acct_yrmon_from.value = GetDateFormat(ymFrom,"ym");
 	}
 }
 
