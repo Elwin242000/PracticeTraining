@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<querys>
+		<query name="CarrierMgmtDBDAOCheckTrdCdRSQL">
+			<desc><![CDATA[DESC Enter..]]></desc>
+			<sql><![CDATA[
+select count(trd_cd) 
+from mdm_trade
+where trd_cd = @[trd_cd]
+    and delt_flg = 'N'			]]></sql>
+			<params>
+				<param name="trd_cd" type="12" value="" out="N"/>
+			</params>
+		</query>
+	</querys>
+</sqls>

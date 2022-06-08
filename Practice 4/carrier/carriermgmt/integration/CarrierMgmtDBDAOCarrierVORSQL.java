@@ -4,10 +4,10 @@
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2022.05.06
+*@LastModifyDate : 2022.06.08
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2022.05.06 
+* 2022.06.08 
 * 1.0 Creation
 =========================================================*/
 package com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration;
@@ -82,6 +82,8 @@ public class CarrierMgmtDBDAOCarrierVORSQL implements ISQLTemplate{
 	 */
 	public void setQuery(){
 		query.append("select" ).append("\n"); 
+		query.append("    jo_crr_cd as jo_crr_cd_hid," ).append("\n"); 
+		query.append("    rlane_cd as rlane_cd_hid," ).append("\n"); 
 		query.append("    jo_crr_cd," ).append("\n"); 
 		query.append("    rlane_cd," ).append("\n"); 
 		query.append("    vndr_seq," ).append("\n"); 

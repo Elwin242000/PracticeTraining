@@ -4,13 +4,13 @@
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2022.05.06
+*@LastModifyDate : 2022.06.07
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2022.05.06 
+* 2022.06.07 
 * 1.0 Creation
 =========================================================*/
-package com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration ;
+package com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration;
 
 import java.util.HashMap;
 import org.apache.log4j.Logger;
@@ -41,7 +41,7 @@ public class CarrierMgmtDBDAOCarrierSearchCarrierRSQL implements ISQLTemplate{
 		setQuery();
 		params = new HashMap<String,String[]>();
 		query.append("/*").append("\n"); 
-		query.append("Path : com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration ").append("\n"); 
+		query.append("Path : com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration").append("\n"); 
 		query.append("FileName : CarrierMgmtDBDAOCarrierSearchCarrierRSQL").append("\n"); 
 		query.append("*/").append("\n"); 
 	}
@@ -58,8 +58,9 @@ public class CarrierMgmtDBDAOCarrierSearchCarrierRSQL implements ISQLTemplate{
 	 * Query 생성
 	 */
 	public void setQuery(){
-		query.append("select distinct(jo_crr_cd)" ).append("\n"); 
-		query.append("from joo_carrier" ).append("\n"); 
+		query.append("select distinct(crr_cd) as jo_crr_cd" ).append("\n"); 
+		query.append("from mdm_carrier" ).append("\n"); 
+		query.append("where delt_flg = 'N'" ).append("\n"); 
 
 	}
 }

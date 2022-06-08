@@ -14,9 +14,9 @@ where 1 = 1
 #if (${cust_cnt_cd} != '')
 and cust_cnt_cd like @[cust_cnt_cd]
 #end
-###if (${cust_seq} != '')
-##and cust_seq like '%'||@[cust_seq]||'%'
-###end
+#if (${cust_seq} != '')
+and cust_seq like '%'||@[cust_seq]||'%'
+#end
 			]]></sql>
 			<params>
 				<param name="cust_cnt_cd" type="12" value="" out="N"/>

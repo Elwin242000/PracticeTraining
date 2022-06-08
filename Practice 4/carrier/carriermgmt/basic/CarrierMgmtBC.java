@@ -78,4 +78,22 @@ public interface CarrierMgmtBC {
 	 * @exception EventException
 	 */
 	public int checkDuplicateInput(CarrierVO carrierVO) throws EventException;
+	
+	/**
+	 * [checkVndrCdInput] to check vendor code exist.</br>
+	 * 
+	 * @param CarrierVO carrierVO
+	 * @return int
+	 * @throws EventException
+	 */
+	public int checkVndrCdInput(CarrierVO carrierVO) throws EventException;
+	
+	/**
+	 * [checkTrdCdInput] to check trade code exist.</br>
+	 * 
+	 * @param CarrierVO carrierVO
+	 * @return int
+	 * @throws EventException
+	 */
+	public int checkTrdCdInput(CarrierVO carrierVO) throws EventException;
 }

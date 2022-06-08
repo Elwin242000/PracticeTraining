@@ -4,8 +4,9 @@
 		<query name="CarrierMgmtDBDAOCarrierSearchLaneRSQL">
 			<desc><![CDATA[DESC Enter..]]></desc>
 			<sql><![CDATA[
-select distinct(rlane_cd)
-from joo_carrier			]]></sql>
+select vsl_slan_cd as rlane_cd
+from mdm_rev_lane
+where delt_flg = 'N'			]]></sql>
 			<params>
 			</params>
 		</query>

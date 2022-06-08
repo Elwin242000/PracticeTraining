@@ -84,9 +84,7 @@
 					<tr>
 						<th width="50">Carrier</th>
 						<td width="120">
-							<script type="text/javascript">
-								ComComboObject('s_carrier', 1, 120, 1, 0, 0);
-							</script>
+							<script type="text/javascript">ComComboObject('s_carrier', 1, 120, 1, 0, 0);</script>
 						</td>
 
 						<th width="50">Vendor</th>
@@ -110,8 +108,8 @@
 	<div class="wrap_result">
 		<div class="opus_design_grid">
 			<div class="opus_design_btn">
-				<button type="button" class="btn_etc" name="btn_Delete" id="btn_Delete">Row Delete</button><!-- 
-				--><button type="button" class="btn_etc" name="btn_Add" id="btn_Add">RowAdd</button>
+				<button type="button" class="btn_normal" name="btn_Delete" id="btn_Delete">Row Delete</button><!-- 
+				--><button type="button" class="btn_normal" name="btn_Add" id="btn_Add">RowAdd</button>
 			</div>
 			<script language="javascript">
 				ComSheetObject('sheet1');

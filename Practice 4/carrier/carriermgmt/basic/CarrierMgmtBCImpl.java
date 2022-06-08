@@ -116,7 +116,8 @@ public class CarrierMgmtBCImpl extends BasicCommandSupport implements CarrierMgm
 			for (int i = 0; i < carrierVO.length; i++){
 				if ( carrierVO[i].getIbflag().equals("I")){
 					if (checkDuplicateInput(carrierVO[i]) >= 1){
-						dups.append(carrierVO[i].getJoCrrCd() + "," + carrierVO[i].getRlaneCd());
+						dups.append(carrierVO[i].getJoCrrCd());
+						dups.append("," + carrierVO[i].getRlaneCd());
 						if (i < carrierVO .length - 1){
 							dups.append("],[");
 						}
@@ -124,7 +125,7 @@ public class CarrierMgmtBCImpl extends BasicCommandSupport implements CarrierMgm
 					}
 					if (i == carrierVO.length-1){
 						if (count > 0){
-							throw new DAOException(new ErrorHandler("ERR00001", new String[]{dups.toString()}).getMessage());
+							throw new DAOException(new ErrorHandler("ERR00002", new String[]{dups.toString()}).getMessage());
 						}
 						else {
 							carrierVO[i].setCreUsrId(account.getUsr_id());
@@ -197,6 +198,39 @@ public class CarrierMgmtBCImpl extends BasicCommandSupport implements CarrierMgm
 		} catch (Exception ex) {
 			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
 		}
-		
+	}
+	
+	/**
+	 * [checkVndrCdInput] to check vendor code exist.</br>
+	 * 
+	 * @param CarrierVO carrierVO
+	 * @return int
+	 * @throws EventException
+	 */
+	public int checkVndrCdInput(CarrierVO carrierVO) throws EventException{
+		try {
+			return dbDao.checkVndrCdInput(carrierVO);
+		} catch(DAOException ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
+		} catch (Exception ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
+		}
+	}
+	
+	/**
+	 * [checkTrdCdInput] to check trade code exist.</br>
+	 * 
+	 * @param CarrierVO carrierVO
+	 * @return int
+	 * @throws EventException
+	 */
+	public int checkTrdCdInput(CarrierVO carrierVO) throws EventException{
+		try{
+			return dbDao.checkTrdCdInput(carrierVO);
+		}catch(DAOException ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
+		} catch (Exception ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
+		}
 	}
 }

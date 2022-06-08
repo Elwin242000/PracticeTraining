@@ -4,10 +4,10 @@
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2022.06.02
+*@LastModifyDate : 2022.06.06
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2022.06.02 
+* 2022.06.06 
 * 1.0 Creation
 =========================================================*/
 package com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration;
@@ -84,9 +84,9 @@ public class CarrierMgmtDBDAOSearchCustomerRSQL implements ISQLTemplate{
 		query.append("#if (${cust_cnt_cd} != '')" ).append("\n"); 
 		query.append("and cust_cnt_cd like @[cust_cnt_cd]" ).append("\n"); 
 		query.append("#end" ).append("\n"); 
-		query.append("###if (${cust_seq} != '')" ).append("\n"); 
-		query.append("##and cust_seq like '%'||@[cust_seq]||'%'" ).append("\n"); 
-		query.append("###end" ).append("\n"); 
+		query.append("#if (${cust_seq} != '')" ).append("\n"); 
+		query.append("and cust_seq like '%'||@[cust_seq]||'%'" ).append("\n"); 
+		query.append("#end" ).append("\n"); 
 
 	}
 }

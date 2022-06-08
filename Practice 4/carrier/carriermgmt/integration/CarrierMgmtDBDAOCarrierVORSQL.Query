@@ -5,6 +5,8 @@
 			<desc><![CDATA[DESC Enter..]]></desc>
 			<sql><![CDATA[
 select
+    jo_crr_cd as jo_crr_cd_hid,
+    rlane_cd as rlane_cd_hid,
     jo_crr_cd,
     rlane_cd,
     vndr_seq,

@@ -143,7 +143,7 @@ function initSheet(sheetObj,sheetNo) {
 	switch (sheetNo) {
 		case 1:
 			with(sheetObj){  
-				var HeadTitle="STS|Chk|Carrier|Rev. Lane|Vendor Code|Customer Code|Customer Code|Trade|Delete Flag|Create Date|Create User ID|Update Date|Update User ID";
+				var HeadTitle="STS|Chk|Hidden Carrier|Hidden Rev. Lane|Carrier|Rev. Lane|Vendor Code|Customer Code|Customer Code|Trade|Delete Flag|Create Date|Create User ID|Update Date|Update User ID";
 				
 				SetConfig( { SearchMode:2, MergeSheet:5, Page:20, FrozenCol:0, DataRowMerge:1 } );
 				
@@ -152,19 +152,21 @@ function initSheet(sheetObj,sheetNo) {
 				InitHeaders(headers, info);
 				
 				var cols = [ 
-		            {Type:"Status",   Hidden:1, Width:50,  Align:"Center",  SaveName:"ibflag"}, 
-		            {Type:"DelCheck", Hidden:0, Width:50,  Align:"Center",  SaveName:"del_chk"}, 
-			        {Type:"Popup",    Hidden:0, Width:100, Align:"Center",  SaveName:"jo_crr_cd",   KeyField:1, UpdateEdit:0, InsertEdit:1, AcceptKeys : "E", InputCaseSensitive : 1, EditLen: 3},
-			        {Type:"Combo",    Hidden:0, Width:100, Align:"Center",  SaveName:"rlane_cd",    KeyField:1, UpdateEdit:0, InsertEdit:1, ComboCode: laneCombo, ComboText: laneCombo},
-			        {Type:"Popup",    Hidden:0, Width:100, Align:"Center",  SaveName:"vndr_seq",    KeyField:1, UpdateEdit:1, InsertEdit:1},
-			        {Type:"Popup",    Hidden:0, Width:50,  Align:"Center",  SaveName:"cust_cnt_cd", KeyField:1, UpdateEdit:1, InsertEdit:1, AcceptKeys : "E", InputCaseSensitive : 1, EditLen: 2}, 
-				    {Type:"Popup",    Hidden:0, Width:100, Align:"Center",  SaveName:"cust_seq",    KeyField:1, UpdateEdit:1, InsertEdit:1, AcceptKeys : "N", EditLen: 6}, 
-				    {Type:"Popup",    Hidden:0, Width:100, Align:"Center",  SaveName:"trd_cd",      KeyField:0, UpdateEdit:1, InsertEdit:1, AcceptKeys : "E", InputCaseSensitive : 1, EditLen: 3},
-				    {Type:"Combo",    Hidden:0, Width:70,  Align:"Center",  SaveName:"delt_flg",    KeyField:0, UpdateEdit:1, InsertEdit:1, ComboCode:"N|Y",  ComboText:"N|Y"}, 
-				    {Type:"Text",     Hidden:0, Width:200, Align:"Center",  SaveName:"cre_dt",      KeyField:0, UpdateEdit:0, InsertEdit:0}, 
-				    {Type:"Text",     Hidden:0, Width:200, Align:"Left",    SaveName:"cre_usr_id",  KeyField:0, UpdateEdit:0, InsertEdit:0}, 
-				    {Type:"Text",     Hidden:0, Width:200, Align:"Center",  SaveName:"upd_dt",      KeyField:0, UpdateEdit:0, InsertEdit:0}, 
-				    {Type:"Text",     Hidden:0, Width:200, Align:"Left",    SaveName:"upd_usr_id",  KeyField:0, UpdateEdit:0, InsertEdit:0}
+		            {Type:"Status",    Hidden:1, Width:50,  Align:"Center",  SaveName:"ibflag"}, 
+		            {Type:"DelCheck",  Hidden:0, Width:50,  Align:"Center",  SaveName:"del_chk"},
+		            {Type:"Text",      Hidden:1, Width:100, Align:"Center",  SaveName:"jo_crr_cd_hid"},
+			        {Type:"Text",      Hidden:1, Width:100, Align:"Center",  SaveName:"rlane_cd_hid"},
+			        {Type:"Popup",     Hidden:0, Width:100, Align:"Center",  SaveName:"jo_crr_cd",     KeyField:1, UpdateEdit:1, InsertEdit:1, AcceptKeys:"E", InputCaseSensitive:1, EditLen:3},
+			        {Type:"Combo",     Hidden:0, Width:100, Align:"Center",  SaveName:"rlane_cd",      KeyField:1, UpdateEdit:1, InsertEdit:1, ComboCode:laneCombo, ComboText: laneCombo},
+			        {Type:"PopupEdit", Hidden:0, Width:100, Align:"Center",  SaveName:"vndr_seq",      KeyField:1, UpdateEdit:1, InsertEdit:1, AcceptKeys:"N", EditLen:6},
+			        {Type:"Popup",     Hidden:0, Width:50,  Align:"Center",  SaveName:"cust_cnt_cd",   KeyField:1, UpdateEdit:1, InsertEdit:1, AcceptKeys:"E", InputCaseSensitive:1, EditLen:2}, 
+				    {Type:"Popup",     Hidden:0, Width:100, Align:"Center",  SaveName:"cust_seq",      KeyField:1, UpdateEdit:1, InsertEdit:1, AcceptKeys:"N", EditLen: 6}, 
+				    {Type:"PopupEdit", Hidden:0, Width:100, Align:"Center",  SaveName:"trd_cd",        KeyField:0, UpdateEdit:1, InsertEdit:1, AcceptKeys:"E", InputCaseSensitive:1, EditLen:3},
+				    {Type:"Combo",     Hidden:0, Width:70,  Align:"Center",  SaveName:"delt_flg",      KeyField:0, UpdateEdit:1, InsertEdit:1, ComboCode:"N|Y",  ComboText:"N|Y"}, 
+				    {Type:"Text",      Hidden:0, Width:200, Align:"Center",  SaveName:"cre_dt",        KeyField:0, UpdateEdit:0, InsertEdit:0}, 
+				    {Type:"Text",      Hidden:0, Width:200, Align:"Left",    SaveName:"cre_usr_id",    KeyField:0, UpdateEdit:0, InsertEdit:0}, 
+				    {Type:"Text",      Hidden:0, Width:200, Align:"Center",  SaveName:"upd_dt",        KeyField:0, UpdateEdit:0, InsertEdit:0}, 
+				    {Type:"Text",      Hidden:0, Width:200, Align:"Left",    SaveName:"upd_usr_id",    KeyField:0, UpdateEdit:0, InsertEdit:0}
 			    ];
 		        InitColumns(cols);
 		        SetEditable(1);
@@ -359,21 +361,9 @@ function sheet1_OnBeforeSave(){
  */
 function sheet1_OnSaveEnd(sheetObj, Code, Msg){
 	if (Code >= 0){
-		if (flagAnnounce == 'Insert'){
-			ComShowCodeMessage('COM130102', sheetObjects[0].id);
-			flagAnnounce = null;
-		}
-		if (flagAnnounce == 'Update'){
-			ComShowCodeMessage('COM130502', sheetObjects[0].id);
-			flagAnnounce = null;
-		}
-		if (flagAnnounce == 'Delete'){
-			ComShowCodeMessage('COM130303', sheetObjects[0].id);
-			flagAnnounce = null;
-		}
 		doActionIBSheet(sheetObjects[0],document.form,IBSEARCH);
 	}
-	else {
+	else{
 		ComShowCodeMessage('COM130103', sheetObjects[0].id);
 		var dupData = sheetObj.FindStatusRow("I");
 		var aRows = dupData.split(';');
@@ -382,10 +372,8 @@ function sheet1_OnSaveEnd(sheetObj, Code, Msg){
 					Msg.includes(sheetObj.GetCellValue(aRows[i],"rlane_cd"))){
 				sheetObj.SetRowBackColor(aRows[i],"#FF6666");
 			}
-			console.log(aRows);
 		}
 	}
-	
 }
 
 /**
@@ -401,7 +389,7 @@ function sheet1_OnSaveEnd(sheetObj, Code, Msg){
 function sheet1_OnChange(sheetObj, Row, Col, Value, OldValue, RaiseFlag){
 	var formObj=document.form ;
 	var colName=sheetObj.ColSaveName(Col);
-	
+
 	if(colName == "jo_crr_cd" || colName == "rlane_cd"){
 		if(sheetObj.GetCellValue(Row,"jo_crr_cd") != "" && sheetObj.GetCellValue(Row,"rlane_cd") != ""){
 			//check on UI
@@ -434,6 +422,29 @@ function sheet1_OnChange(sheetObj, Row, Col, Value, OldValue, RaiseFlag){
 		}
 	}
 	
+	if(colName == "vndr_seq"){//check exist vendor code
+		formObj.f_cmd.value		= COMMAND02;
+		var sParam				= FormQueryString(formObj) + "&vndr_seq=" + Value;
+		var sXml 				= sheetObj.GetSearchData("PRACTICE_4GS.do", sParam, {sync:1});	
+		var flag				= ComGetEtcData(sXml, "ISEXIST");
+		if(flag == 'N'){
+			ComShowCodeMessage("COM130402",["Vendor"]);
+			sheetObj.SetCellValue(Row, Col,OldValue,0);
+			sheetObj.SelectCell(Row, Col);
+		}
+	}
+	
+	if(colName == "trd_cd"){//check exist trade code
+		formObj.f_cmd.value     = COMMAND04;
+		var sParam              = FormQueryString(formObj) + "&trd_cd=" + Value;
+		var sXml                = sheetObj.GetSearchData("PRACTICE_4GS.do", sParam, {sync:1});
+		var flag                = ComGetEtcData(sXml, "ISEXIST");
+		if(flag == 'N'){
+			ComShowCodeMessage("COM130402", ["Trade"]);
+			sheetObj.SetCellValue(Row, Col, OldValue, 0);
+			sheetObj.SelectCell(Row, Col);
+		}
+	}
 }
 
 /**

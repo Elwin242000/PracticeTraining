@@ -1,13 +1,13 @@
 /*=========================================================
 *Copyright(c) 2022 CyberLogitec
-*@FileName : CarrierMgmtDBDAOCarrierSearchLaneRSQL.java
+*@FileName : CarrierMgmtDBDAOCheckVndrCdRSQL.java
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2022.06.07
+*@LastModifyDate : 2022.06.06
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2022.06.07 
+* 2022.06.06 
 * 1.0 Creation
 =========================================================*/
 package com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration;
@@ -23,7 +23,7 @@ import com.clt.framework.support.db.ISQLTemplate;
  * @since J2EE 1.6
  */
 
-public class CarrierMgmtDBDAOCarrierSearchLaneRSQL implements ISQLTemplate{
+public class CarrierMgmtDBDAOCarrierSearchVndrCdRSQL implements ISQLTemplate{
 
 	private StringBuffer query = new StringBuffer();
 	
@@ -37,12 +37,21 @@ public class CarrierMgmtDBDAOCarrierSearchLaneRSQL implements ISQLTemplate{
 	  * DESC Enter..
 	  * </pre>
 	  */
-	public CarrierMgmtDBDAOCarrierSearchLaneRSQL(){
+	public CarrierMgmtDBDAOCarrierSearchVndrCdRSQL(){
 		setQuery();
 		params = new HashMap<String,String[]>();
+		String tmp = null;
+		String[] arrTmp = null;
+		tmp = java.sql.Types.VARCHAR + ",N";
+		arrTmp = tmp.split(",");
+		if(arrTmp.length !=2){
+			throw new IllegalArgumentException();
+		}
+		params.put("vndr_seq",new String[]{arrTmp[0],arrTmp[1]});
+
 		query.append("/*").append("\n"); 
 		query.append("Path : com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration").append("\n"); 
-		query.append("FileName : CarrierMgmtDBDAOCarrierSearchLaneRSQL").append("\n"); 
+		query.append("FileName : CarrierMgmtDBDAOCheckVndrCdRSQL").append("\n"); 
 		query.append("*/").append("\n"); 
 	}
 	
@@ -58,9 +67,10 @@ public class CarrierMgmtDBDAOCarrierSearchLaneRSQL implements ISQLTemplate{
 	 * Query 생성
 	 */
 	public void setQuery(){
-		query.append("select vsl_slan_cd as rlane_cd" ).append("\n"); 
-		query.append("from mdm_rev_lane" ).append("\n"); 
-		query.append("where delt_flg = 'N'" ).append("\n"); 
+		query.append("select count(vndr_seq) " ).append("\n"); 
+		query.append("from mdm_vendor " ).append("\n"); 
+		query.append("where vndr_seq = @[vndr_seq]" ).append("\n"); 
+		query.append("    and delt_flg = 'N'" ).append("\n"); 
 
 	}
 }

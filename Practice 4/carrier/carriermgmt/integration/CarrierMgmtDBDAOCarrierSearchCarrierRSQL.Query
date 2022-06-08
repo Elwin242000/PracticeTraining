@@ -4,8 +4,9 @@
 		<query name="CarrierMgmtDBDAOCarrierSearchCarrierRSQL">
 			<desc><![CDATA[DESC Enter..]]></desc>
 			<sql><![CDATA[
-select distinct(jo_crr_cd)
-from joo_carrier			]]></sql>
+select distinct(crr_cd) as jo_crr_cd
+from mdm_carrier
+where delt_flg = 'N'			]]></sql>
 			<params>
 			</params>
 		</query>

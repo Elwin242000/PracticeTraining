@@ -84,7 +84,10 @@ public class Practice4SC extends ServiceCommandSupport {
 			else if (e.getFormCommand().isCommand(FormCommand.COMMAND01)){
 				eventResponse = chkDupData(e);
 			}
-			
+			else if (e.getFormCommand().isCommand(FormCommand.COMMAND02) ||
+					e.getFormCommand().isCommand(FormCommand.COMMAND04)){
+				eventResponse = chkExistData(e);
+			}
 		}
 		
 		if (e.getEventName().equalsIgnoreCase("CustomerEvent")){
@@ -174,7 +177,7 @@ public class Practice4SC extends ServiceCommandSupport {
 		try{
 			begin();
 			command.manageCarrierCarrierMgmt(event.getCarrierVOs(),account);
-			eventResponse.setUserMessage(new ErrorHandler("XXXXXXXXX").getUserMessage());
+			eventResponse.setUserMessage(new ErrorHandler("BKG06071").getUserMessage());
 			commit();
 		} catch(EventException ex) {
 			rollback();
@@ -224,6 +227,27 @@ public class Practice4SC extends ServiceCommandSupport {
 		
 		try{
 			int num = command.checkDuplicateInput(event.getCarrierVO());
+			eventResponse.setETCData("ISEXIST", num > 0 ? "Y" : "N");
+		}catch(EventException ex){
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
+		}catch(Exception ex){
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
+		}	
+		return eventResponse;
+	}
+	
+	private EventResponse chkExistData(Event e) throws EventException {
+		GeneralEventResponse eventResponse = new GeneralEventResponse();
+		Practice4Event event = (Practice4Event)e;
+		CarrierMgmtBC command = new CarrierMgmtBCImpl();
+		int num = 0;
+		try{
+			if (e.getFormCommand().isCommand(FormCommand.COMMAND02)){
+				num = command.checkVndrCdInput(event.getCarrierVO());
+			}
+			else if (e.getFormCommand().isCommand(FormCommand.COMMAND04)){
+				num = command.checkTrdCdInput(event.getCarrierVO());
+			}
 			eventResponse.setETCData("ISEXIST", num > 0 ? "Y" : "N");
 		}catch(EventException ex){
 			throw new EventException(new ErrorHandler(ex).getMessage(),ex);

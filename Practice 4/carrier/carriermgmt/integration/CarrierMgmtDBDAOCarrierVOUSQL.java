@@ -4,13 +4,13 @@
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2022.05.11
+*@LastModifyDate : 2022.06.08
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2022.05.11 
+* 2022.06.08 
 * 1.0 Creation
 =========================================================*/
-package com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration ;
+package com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration;
 
 import java.util.HashMap;
 import org.apache.log4j.Logger;
@@ -18,7 +18,7 @@ import com.clt.framework.support.db.ISQLTemplate;
 
 /**
  *
- * @author Hai To
+ * @author Truong Vu
  * @see DAO 참조
  * @since J2EE 1.6
  */
@@ -47,13 +47,6 @@ public class CarrierMgmtDBDAOCarrierVOUSQL implements ISQLTemplate{
 		if(arrTmp.length !=2){
 			throw new IllegalArgumentException();
 		}
-		params.put("vndr_seq",new String[]{arrTmp[0],arrTmp[1]});
-
-		tmp = java.sql.Types.VARCHAR + ",N";
-		arrTmp = tmp.split(",");
-		if(arrTmp.length !=2){
-			throw new IllegalArgumentException();
-		}
 		params.put("jo_crr_cd",new String[]{arrTmp[0],arrTmp[1]});
 
 		tmp = java.sql.Types.VARCHAR + ",N";
@@ -61,7 +54,21 @@ public class CarrierMgmtDBDAOCarrierVOUSQL implements ISQLTemplate{
 		if(arrTmp.length !=2){
 			throw new IllegalArgumentException();
 		}
+		params.put("vndr_seq",new String[]{arrTmp[0],arrTmp[1]});
+
+		tmp = java.sql.Types.VARCHAR + ",N";
+		arrTmp = tmp.split(",");
+		if(arrTmp.length !=2){
+			throw new IllegalArgumentException();
+		}
 		params.put("rlane_cd",new String[]{arrTmp[0],arrTmp[1]});
+
+		tmp = java.sql.Types.VARCHAR + ",N";
+		arrTmp = tmp.split(",");
+		if(arrTmp.length !=2){
+			throw new IllegalArgumentException();
+		}
+		params.put("jo_crr_cd_hid",new String[]{arrTmp[0],arrTmp[1]});
 
 		tmp = java.sql.Types.VARCHAR + ",N";
 		arrTmp = tmp.split(",");
@@ -76,6 +83,13 @@ public class CarrierMgmtDBDAOCarrierVOUSQL implements ISQLTemplate{
 			throw new IllegalArgumentException();
 		}
 		params.put("trd_cd",new String[]{arrTmp[0],arrTmp[1]});
+
+		tmp = java.sql.Types.VARCHAR + ",N";
+		arrTmp = tmp.split(",");
+		if(arrTmp.length !=2){
+			throw new IllegalArgumentException();
+		}
+		params.put("rlane_cd_hid",new String[]{arrTmp[0],arrTmp[1]});
 
 		tmp = java.sql.Types.VARCHAR + ",N";
 		arrTmp = tmp.split(",");
@@ -99,7 +113,7 @@ public class CarrierMgmtDBDAOCarrierVOUSQL implements ISQLTemplate{
 		params.put("cust_cnt_cd",new String[]{arrTmp[0],arrTmp[1]});
 
 		query.append("/*").append("\n"); 
-		query.append("Path : com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration ").append("\n"); 
+		query.append("Path : com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration").append("\n"); 
 		query.append("FileName : CarrierMgmtDBDAOCarrierVOUSQL").append("\n"); 
 		query.append("*/").append("\n"); 
 	}
@@ -117,6 +131,8 @@ public class CarrierMgmtDBDAOCarrierVOUSQL implements ISQLTemplate{
 	 */
 	public void setQuery(){
 		query.append("update joo_carrier set" ).append("\n"); 
+		query.append("	jo_crr_cd = @[jo_crr_cd]," ).append("\n"); 
+		query.append("	rlane_cd = @[rlane_cd]," ).append("\n"); 
 		query.append("    vndr_seq = @[vndr_seq], " ).append("\n"); 
 		query.append("    cust_cnt_cd = @[cust_cnt_cd], " ).append("\n"); 
 		query.append("    cust_seq = @[cust_seq], " ).append("\n"); 
@@ -124,8 +140,8 @@ public class CarrierMgmtDBDAOCarrierVOUSQL implements ISQLTemplate{
 		query.append("    delt_flg = @[delt_flg]," ).append("\n"); 
 		query.append("    upd_dt = sysdate, " ).append("\n"); 
 		query.append("    upd_usr_id = @[upd_usr_id]" ).append("\n"); 
-		query.append("where jo_crr_cd = @[jo_crr_cd]" ).append("\n"); 
-		query.append("    and rlane_cd = @[rlane_cd]" ).append("\n"); 
+		query.append("where jo_crr_cd = @[jo_crr_cd_hid]" ).append("\n"); 
+		query.append("    and rlane_cd = @[rlane_cd_hid]" ).append("\n"); 
 
 	}
 }

@@ -109,8 +109,8 @@ public class CarrierMgmtDBDAO extends DBDAOSupport {
 		catch(Exception ex) {
 			log.error(ex.getMessage(),ex);
 			throw new DAOException(new ErrorHandler(ex).getMessage());
-		}
-		return list;
+		 }
+		 return list;
 	}
 	
 	/**
@@ -127,7 +127,7 @@ public class CarrierMgmtDBDAO extends DBDAOSupport {
 		Map<String, Object> param = new HashMap<String, Object>();
 		//velocity parameter
 		Map<String, Object> velParam = new HashMap<String, Object>();
-
+		 
 		try{
 			dbRowset = new SQLExecuter("").executeQuery((ISQLTemplate)new CarrierMgmtDBDAOCarrierSearchLaneRSQL(), param, velParam);
 			list = (List)RowSetUtil.rowSetToVOs(dbRowset, CarrierVO .class);
@@ -139,8 +139,8 @@ public class CarrierMgmtDBDAO extends DBDAOSupport {
 		catch(Exception ex) {
 			log.error(ex.getMessage(),ex);
 			throw new DAOException(new ErrorHandler(ex).getMessage());
-		}
-		return list;
+		 }
+		 return list;
 	}
 	
 	/**
@@ -152,7 +152,7 @@ public class CarrierMgmtDBDAO extends DBDAOSupport {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<CustomerVO> searchCustomer(CustomerVO customerVO) throws DAOException {
-		DBRowSet dbRowset = null;
+ 		DBRowSet dbRowset = null;
 		List<CustomerVO> list = new ArrayList();
 		
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -177,7 +177,7 @@ public class CarrierMgmtDBDAO extends DBDAOSupport {
 			throw new DAOException(new ErrorHandler(ex).getMessage());
 		}
 		return list;
-	}
+ 	}
 	
 	/**
 	 * [addmanageCarrierS] to add ErrMsgVOs.<br>
@@ -300,6 +300,74 @@ public class CarrierMgmtDBDAO extends DBDAOSupport {
 			while (dbRowset.next()){
 				String countE = dbRowset.getString(1);
 				count = Integer.parseInt(countE);
+			}
+		}
+		catch(SQLException se) {
+			//show error in console with error message
+			log.error(se.getMessage(),se);
+			//throw EventException
+			throw new DAOException(new ErrorHandler(se).getMessage());
+		} catch(Exception ex) {
+			//show error in console with error message
+			log.error(ex.getMessage(),ex);
+			//throw EventException
+			throw new DAOException(new ErrorHandler(ex).getMessage());
+		}
+		return count;
+	}
+	
+	/**
+	 * Check vendor code exist. </br>
+	 * 
+	 * @param CarrierVO carrierVO
+	 * @return int
+	 * @throws DAOException
+	 * @throws Exception
+	 */
+	public int checkVndrCdInput(CarrierVO carrierVO) throws DAOException, Exception{
+		DBRowSet dbRowset = null;
+		Map<String, Object> param = new HashMap<String, Object>();
+		int count = 0;
+		try{
+			Map<String, String> mapVO = carrierVO.getColumnValues();
+			param.putAll(mapVO);
+			dbRowset = new SQLExecuter("").executeQuery((ISQLTemplate)new CarrierMgmtDBDAOCarrierSearchVndrCdRSQL(), param, null);
+			while (dbRowset.next()){
+				count = dbRowset.getInt(1);
+			}
+		}
+		catch(SQLException se) {
+			//show error in console with error message
+			log.error(se.getMessage(),se);
+			//throw EventException
+			throw new DAOException(new ErrorHandler(se).getMessage());
+		} catch(Exception ex) {
+			//show error in console with error message
+			log.error(ex.getMessage(),ex);
+			//throw EventException
+			throw new DAOException(new ErrorHandler(ex).getMessage());
+		}
+		return count;
+	}
+	
+	/**
+	 * Check trade code exist.</br>
+	 * 
+	 * @param CarrierVO carrierVO
+	 * @return int
+	 * @throws DAOException
+	 * @throws Exception
+	 */
+	public int checkTrdCdInput(CarrierVO carrierVO) throws DAOException, Exception {
+		DBRowSet dbRowset = null;
+		Map<String, Object> param = new HashMap<String, Object>();
+		int count = 0;
+		try{
+			Map<String, String> mapVO = carrierVO.getColumnValues();
+			param.putAll(mapVO);
+			dbRowset = new SQLExecuter("").executeQuery((ISQLTemplate)new CarrierMgmtDBDAOCarrierSearchTrdCdRSQL(), param, null);
+			while (dbRowset.next()){
+				count = dbRowset.getInt(1);
 			}
 		}
 		catch(SQLException se) {
