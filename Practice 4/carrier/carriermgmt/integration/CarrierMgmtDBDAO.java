@@ -99,7 +99,7 @@ public class CarrierMgmtDBDAO extends DBDAOSupport {
 		Map<String, Object> velParam = new HashMap<String, Object>();
 		 
 		try{
-			dbRowset = new SQLExecuter("").executeQuery((ISQLTemplate)new CarrierMgmtDBDAOCarrierSearchCarrierRSQL(), param, velParam);
+			dbRowset = new SQLExecuter("").executeQuery((ISQLTemplate)new CarrierMgmtDBDAOCarrierComboRSQL(), param, velParam);
 			list = (List)RowSetUtil.rowSetToVOs(dbRowset, CarrierVO .class);
 		} 
 		catch(SQLException se) {
@@ -129,7 +129,7 @@ public class CarrierMgmtDBDAO extends DBDAOSupport {
 		Map<String, Object> velParam = new HashMap<String, Object>();
 		 
 		try{
-			dbRowset = new SQLExecuter("").executeQuery((ISQLTemplate)new CarrierMgmtDBDAOCarrierSearchLaneRSQL(), param, velParam);
+			dbRowset = new SQLExecuter("").executeQuery((ISQLTemplate)new CarrierMgmtDBDAOLaneComboRSQL(), param, velParam);
 			list = (List)RowSetUtil.rowSetToVOs(dbRowset, CarrierVO .class);
 		} 
 		catch(SQLException se) {
@@ -317,6 +317,74 @@ public class CarrierMgmtDBDAO extends DBDAOSupport {
 	}
 	
 	/**
+	 * Check carrier code exist. </br>
+	 * 
+	 * @param CarrierVO carrierVO
+	 * @return
+	 * @throws DAOException
+	 * @throws Exception
+	 */
+	public int checkCrrCdInput(CarrierVO carrierVO) throws DAOException, Exception{
+		DBRowSet dbRowset = null;
+		Map<String, Object> param = new HashMap<String, Object>();
+		int count = 0;
+		try{
+			Map<String, String> mapVO = carrierVO.getColumnValues();
+			param.putAll(mapVO);
+			dbRowset = new SQLExecuter("").executeQuery((ISQLTemplate)new CarrierMgmtDBDAOSearchCarrierRSQL(), param, null);
+			while (dbRowset.next()){
+				count = dbRowset.getInt(1);
+			}
+		}
+		catch(SQLException se) {
+			//show error in console with error message
+			log.error(se.getMessage(),se);
+			//throw EventException
+			throw new DAOException(new ErrorHandler(se).getMessage());
+		} catch(Exception ex) {
+			//show error in console with error message
+			log.error(ex.getMessage(),ex);
+			//throw EventException
+			throw new DAOException(new ErrorHandler(ex).getMessage());
+		}
+		return count;
+	}
+	
+	/**
+	 * Check lane code exist. </br>
+	 * 
+	 * @param CarrierVO carrierVO
+	 * @return
+	 * @throws DAOException
+	 * @throws Exception
+	 */
+	public int checkRlaneCdInput(CarrierVO carrierVO) throws DAOException, Exception{
+		DBRowSet dbRowset = null;
+		Map<String, Object> param = new HashMap<String, Object>();
+		int count = 0;
+		try{
+			Map<String, String> mapVO = carrierVO.getColumnValues();
+			param.putAll(mapVO);
+			dbRowset = new SQLExecuter("").executeQuery((ISQLTemplate)new CarrierMgmtDBDAOSearchLaneRSQL(), param, null);
+			while (dbRowset.next()){
+				count = dbRowset.getInt(1);
+			}
+		}
+		catch(SQLException se) {
+			//show error in console with error message
+			log.error(se.getMessage(),se);
+			//throw EventException
+			throw new DAOException(new ErrorHandler(se).getMessage());
+		} catch(Exception ex) {
+			//show error in console with error message
+			log.error(ex.getMessage(),ex);
+			//throw EventException
+			throw new DAOException(new ErrorHandler(ex).getMessage());
+		}
+		return count;
+	}
+	
+	/**
 	 * Check vendor code exist. </br>
 	 * 
 	 * @param CarrierVO carrierVO
@@ -331,7 +399,7 @@ public class CarrierMgmtDBDAO extends DBDAOSupport {
 		try{
 			Map<String, String> mapVO = carrierVO.getColumnValues();
 			param.putAll(mapVO);
-			dbRowset = new SQLExecuter("").executeQuery((ISQLTemplate)new CarrierMgmtDBDAOCarrierSearchVndrCdRSQL(), param, null);
+			dbRowset = new SQLExecuter("").executeQuery((ISQLTemplate)new CarrierMgmtDBDAOSearchVndrCdRSQL(), param, null);
 			while (dbRowset.next()){
 				count = dbRowset.getInt(1);
 			}
@@ -365,7 +433,7 @@ public class CarrierMgmtDBDAO extends DBDAOSupport {
 		try{
 			Map<String, String> mapVO = carrierVO.getColumnValues();
 			param.putAll(mapVO);
-			dbRowset = new SQLExecuter("").executeQuery((ISQLTemplate)new CarrierMgmtDBDAOCarrierSearchTrdCdRSQL(), param, null);
+			dbRowset = new SQLExecuter("").executeQuery((ISQLTemplate)new CarrierMgmtDBDAOSearchTrdCdRSQL(), param, null);
 			while (dbRowset.next()){
 				count = dbRowset.getInt(1);
 			}

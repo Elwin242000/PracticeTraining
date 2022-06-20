@@ -1,16 +1,16 @@
 /*=========================================================
 *Copyright(c) 2022 CyberLogitec
-*@FileName : CarrierMgmtDBDAOCheckTrdCdRSQL.java
+*@FileName : CarrierMgmtDBDAOSearchCarrierRSQL.java
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2022.06.07
+*@LastModifyDate : 2022.06.08
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2022.06.07 
+* 2022.06.08 
 * 1.0 Creation
 =========================================================*/
-package com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration;
+package com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration ;
 
 import java.util.HashMap;
 import org.apache.log4j.Logger;
@@ -23,7 +23,7 @@ import com.clt.framework.support.db.ISQLTemplate;
  * @since J2EE 1.6
  */
 
-public class CarrierMgmtDBDAOCarrierSearchTrdCdRSQL implements ISQLTemplate{
+public class CarrierMgmtDBDAOSearchCarrierRSQL implements ISQLTemplate{
 
 	private StringBuffer query = new StringBuffer();
 	
@@ -37,7 +37,7 @@ public class CarrierMgmtDBDAOCarrierSearchTrdCdRSQL implements ISQLTemplate{
 	  * DESC Enter..
 	  * </pre>
 	  */
-	public CarrierMgmtDBDAOCarrierSearchTrdCdRSQL(){
+	public CarrierMgmtDBDAOSearchCarrierRSQL(){
 		setQuery();
 		params = new HashMap<String,String[]>();
 		String tmp = null;
@@ -47,11 +47,11 @@ public class CarrierMgmtDBDAOCarrierSearchTrdCdRSQL implements ISQLTemplate{
 		if(arrTmp.length !=2){
 			throw new IllegalArgumentException();
 		}
-		params.put("trd_cd",new String[]{arrTmp[0],arrTmp[1]});
+		params.put("jo_crr_cd",new String[]{arrTmp[0],arrTmp[1]});
 
 		query.append("/*").append("\n"); 
-		query.append("Path : com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration").append("\n"); 
-		query.append("FileName : CarrierMgmtDBDAOCheckTrdCdRSQL").append("\n"); 
+		query.append("Path : com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration ").append("\n"); 
+		query.append("FileName : CarrierMgmtDBDAOSearchCarrierRSQL").append("\n"); 
 		query.append("*/").append("\n"); 
 	}
 	
@@ -67,9 +67,9 @@ public class CarrierMgmtDBDAOCarrierSearchTrdCdRSQL implements ISQLTemplate{
 	 * Query 생성
 	 */
 	public void setQuery(){
-		query.append("select count(trd_cd) " ).append("\n"); 
-		query.append("from mdm_trade" ).append("\n"); 
-		query.append("where trd_cd = @[trd_cd]" ).append("\n"); 
+		query.append("select count(crr_cd)" ).append("\n"); 
+		query.append("from mdm_carrier" ).append("\n"); 
+		query.append("where crr_cd = @[jo_crr_cd]" ).append("\n"); 
 		query.append("    and delt_flg = 'N'" ).append("\n"); 
 
 	}

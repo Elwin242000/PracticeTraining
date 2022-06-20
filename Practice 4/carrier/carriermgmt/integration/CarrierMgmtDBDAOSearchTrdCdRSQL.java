@@ -1,13 +1,13 @@
 /*=========================================================
 *Copyright(c) 2022 CyberLogitec
-*@FileName : CarrierMgmtDBDAOCheckVndrCdRSQL.java
+*@FileName : CarrierMgmtDBDAOCheckTrdCdRSQL.java
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2022.06.06
+*@LastModifyDate : 2022.06.07
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2022.06.06 
+* 2022.06.07 
 * 1.0 Creation
 =========================================================*/
 package com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration;
@@ -23,7 +23,7 @@ import com.clt.framework.support.db.ISQLTemplate;
  * @since J2EE 1.6
  */
 
-public class CarrierMgmtDBDAOCarrierSearchVndrCdRSQL implements ISQLTemplate{
+public class CarrierMgmtDBDAOSearchTrdCdRSQL implements ISQLTemplate{
 
 	private StringBuffer query = new StringBuffer();
 	
@@ -37,7 +37,7 @@ public class CarrierMgmtDBDAOCarrierSearchVndrCdRSQL implements ISQLTemplate{
 	  * DESC Enter..
 	  * </pre>
 	  */
-	public CarrierMgmtDBDAOCarrierSearchVndrCdRSQL(){
+	public CarrierMgmtDBDAOSearchTrdCdRSQL(){
 		setQuery();
 		params = new HashMap<String,String[]>();
 		String tmp = null;
@@ -47,11 +47,11 @@ public class CarrierMgmtDBDAOCarrierSearchVndrCdRSQL implements ISQLTemplate{
 		if(arrTmp.length !=2){
 			throw new IllegalArgumentException();
 		}
-		params.put("vndr_seq",new String[]{arrTmp[0],arrTmp[1]});
+		params.put("trd_cd",new String[]{arrTmp[0],arrTmp[1]});
 
 		query.append("/*").append("\n"); 
 		query.append("Path : com.clt.apps.opus.esm.clv.practice4.carriermgmt.integration").append("\n"); 
-		query.append("FileName : CarrierMgmtDBDAOCheckVndrCdRSQL").append("\n"); 
+		query.append("FileName : CarrierMgmtDBDAOCheckTrdCdRSQL").append("\n"); 
 		query.append("*/").append("\n"); 
 	}
 	
@@ -67,9 +67,9 @@ public class CarrierMgmtDBDAOCarrierSearchVndrCdRSQL implements ISQLTemplate{
 	 * Query 생성
 	 */
 	public void setQuery(){
-		query.append("select count(vndr_seq) " ).append("\n"); 
-		query.append("from mdm_vendor " ).append("\n"); 
-		query.append("where vndr_seq = @[vndr_seq]" ).append("\n"); 
+		query.append("select count(trd_cd) " ).append("\n"); 
+		query.append("from mdm_trade" ).append("\n"); 
+		query.append("where trd_cd = @[trd_cd]" ).append("\n"); 
 		query.append("    and delt_flg = 'N'" ).append("\n"); 
 
 	}

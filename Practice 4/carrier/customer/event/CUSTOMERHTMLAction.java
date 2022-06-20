@@ -40,7 +40,7 @@ public class CUSTOMERHTMLAction extends HTMLActionSupport {
 	 */
 	public Event perform(HttpServletRequest request) throws HTMLActionException {
 		
-		FormCommand command = FormCommand.fromRequest(request);
+    	FormCommand command = FormCommand.fromRequest(request);
 		CustomerEvent event = new CustomerEvent();
 		
 		if(command.isCommand(FormCommand.SEARCH)) {

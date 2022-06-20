@@ -80,6 +80,24 @@ public interface CarrierMgmtBC {
 	public int checkDuplicateInput(CarrierVO carrierVO) throws EventException;
 	
 	/**
+	 * [checkCrrCdInput] to check carrier code exist. </br>
+	 * 
+	 * @param CarrierVO carrierVO
+	 * @return int
+	 * @throws EventException
+	 */
+	public int checkCrrCdInput(CarrierVO carrierVO) throws EventException;
+	
+	/**
+	 * [checkRlaneCdInput] to check lane code exist. </br>
+	 * 
+	 * @param CarrierVO carrierVO
+	 * @return int
+	 * @throws EventException
+	 */
+	public int checkRlaneCdInput(CarrierVO carrierVO) throws EventException;
+	
+	/**
 	 * [checkVndrCdInput] to check vendor code exist.</br>
 	 * 
 	 * @param CarrierVO carrierVO

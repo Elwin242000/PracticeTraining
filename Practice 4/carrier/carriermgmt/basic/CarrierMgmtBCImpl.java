@@ -201,6 +201,40 @@ public class CarrierMgmtBCImpl extends BasicCommandSupport implements CarrierMgm
 	}
 	
 	/**
+	 * [checkCrrCdInput] to check carrier code exist. </br>
+	 * 
+	 * @param CarrierVO carrierVO
+	 * @return
+	 * @throws EventException
+	 */
+	public int checkCrrCdInput(CarrierVO carrierVO) throws EventException{
+		try {
+			return dbDao.checkCrrCdInput(carrierVO);
+		} catch(DAOException ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
+		} catch (Exception ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
+		}
+	}
+	
+	/**
+	 * [checkRlaneCdInput] to check lane code exist. </br>
+	 * 
+	 * @param CarrierVO carrierVO
+	 * @return int
+	 * @throws EventException
+	 */
+	public int checkRlaneCdInput(CarrierVO carrierVO) throws EventException{
+		try {
+			return dbDao.checkRlaneCdInput(carrierVO);
+		} catch(DAOException ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
+		} catch (Exception ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
+		}
+	}
+	
+	/**
 	 * [checkVndrCdInput] to check vendor code exist.</br>
 	 * 
 	 * @param CarrierVO carrierVO

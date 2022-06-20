@@ -85,7 +85,9 @@ public class Practice4SC extends ServiceCommandSupport {
 				eventResponse = chkDupData(e);
 			}
 			else if (e.getFormCommand().isCommand(FormCommand.COMMAND02) ||
-					e.getFormCommand().isCommand(FormCommand.COMMAND04)){
+					e.getFormCommand().isCommand(FormCommand.COMMAND03) ||
+					e.getFormCommand().isCommand(FormCommand.COMMAND04) ||
+					e.getFormCommand().isCommand(FormCommand.COMMAND05)){
 				eventResponse = chkExistData(e);
 			}
 		}
@@ -235,7 +237,7 @@ public class Practice4SC extends ServiceCommandSupport {
 		}	
 		return eventResponse;
 	}
-	
+
 	private EventResponse chkExistData(Event e) throws EventException {
 		GeneralEventResponse eventResponse = new GeneralEventResponse();
 		Practice4Event event = (Practice4Event)e;
@@ -245,8 +247,14 @@ public class Practice4SC extends ServiceCommandSupport {
 			if (e.getFormCommand().isCommand(FormCommand.COMMAND02)){
 				num = command.checkVndrCdInput(event.getCarrierVO());
 			}
-			else if (e.getFormCommand().isCommand(FormCommand.COMMAND04)){
+			else if (e.getFormCommand().isCommand(FormCommand.COMMAND03)){
 				num = command.checkTrdCdInput(event.getCarrierVO());
+			}
+			else if (e.getFormCommand().isCommand(FormCommand.COMMAND04)){
+				num = command.checkCrrCdInput(event.getCarrierVO());
+			}
+			else if (e.getFormCommand().isCommand(FormCommand.COMMAND05)){
+				num = command.checkRlaneCdInput(event.getCarrierVO());
 			}
 			eventResponse.setETCData("ISEXIST", num > 0 ? "Y" : "N");
 		}catch(EventException ex){

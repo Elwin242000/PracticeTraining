@@ -66,7 +66,9 @@ public class PRACTICE_4HTMLAction extends HTMLActionSupport{
 			event.setCarrierVO((CarrierVO)getVO(request, CarrierVO.class,""));
 		}
 		else if (command.isCommand(FormCommand.COMMAND02) ||
-				command.isCommand(FormCommand.COMMAND04)){
+				command.isCommand(FormCommand.COMMAND03) ||
+				command.isCommand(FormCommand.COMMAND04) ||
+				command.isCommand(FormCommand.COMMAND05)){
 			event.setCarrierVO((CarrierVO)getVO(request, CarrierVO.class,""));
 		}
 		

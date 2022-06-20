@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<querys>
+		<query name="CarrierMgmtDBDAOSearchLaneRSQL">
+			<desc><![CDATA[e]]></desc>
+			<sql><![CDATA[
+select count(vsl_slan_cd)
+from mdm_rev_lane
+where vsl_slan_cd = @[rlane_cd]
+    and delt_flg = 'N'			]]></sql>
+			<params>
+				<param name="rlane_cd" type="12" value="" out="N"/>
+			</params>
+		</query>
+	</querys>
+</sqls>

@@ -1,4 +1,4 @@
-/*=========================================================
+	/*=========================================================
 *Copyright(c) 2022 CyberLogitec
 *@FileName : PRACTICE_4.js.java
 *@FileTitle : Carrier Management
@@ -156,12 +156,12 @@ function initSheet(sheetObj,sheetNo) {
 		            {Type:"DelCheck",  Hidden:0, Width:50,  Align:"Center",  SaveName:"del_chk"},
 		            {Type:"Text",      Hidden:1, Width:100, Align:"Center",  SaveName:"jo_crr_cd_hid"},
 			        {Type:"Text",      Hidden:1, Width:100, Align:"Center",  SaveName:"rlane_cd_hid"},
-			        {Type:"Popup",     Hidden:0, Width:100, Align:"Center",  SaveName:"jo_crr_cd",     KeyField:1, UpdateEdit:1, InsertEdit:1, AcceptKeys:"E", InputCaseSensitive:1, EditLen:3},
-			        {Type:"Combo",     Hidden:0, Width:100, Align:"Center",  SaveName:"rlane_cd",      KeyField:1, UpdateEdit:1, InsertEdit:1, ComboCode:laneCombo, ComboText: laneCombo},
-			        {Type:"PopupEdit", Hidden:0, Width:100, Align:"Center",  SaveName:"vndr_seq",      KeyField:1, UpdateEdit:1, InsertEdit:1, AcceptKeys:"N", EditLen:6},
-			        {Type:"Popup",     Hidden:0, Width:50,  Align:"Center",  SaveName:"cust_cnt_cd",   KeyField:1, UpdateEdit:1, InsertEdit:1, AcceptKeys:"E", InputCaseSensitive:1, EditLen:2}, 
-				    {Type:"Popup",     Hidden:0, Width:100, Align:"Center",  SaveName:"cust_seq",      KeyField:1, UpdateEdit:1, InsertEdit:1, AcceptKeys:"N", EditLen: 6}, 
-				    {Type:"PopupEdit", Hidden:0, Width:100, Align:"Center",  SaveName:"trd_cd",        KeyField:0, UpdateEdit:1, InsertEdit:1, AcceptKeys:"E", InputCaseSensitive:1, EditLen:3},
+			        {Type:"PopupEdit", Hidden:0, Width:100, Align:"Center",  SaveName:"jo_crr_cd",     KeyField:1, UpdateEdit:1, InsertEdit:1, AcceptKeys:"E",   InputCaseSensitive:1, EditLen:3},
+			        {Type:"ComboEdit", Hidden:0, Width:100, Align:"Center",  SaveName:"rlane_cd",      KeyField:1, UpdateEdit:1, InsertEdit:1, AcceptKeys:"N|E", InputCaseSensitive:1, EditLen:3, ComboCode:laneCombo, ComboText: laneCombo},
+			        {Type:"PopupEdit", Hidden:0, Width:100, Align:"Center",  SaveName:"vndr_seq",      KeyField:1, UpdateEdit:1, InsertEdit:1, AcceptKeys:"N",   EditLen:6},
+			        {Type:"Popup",     Hidden:0, Width:50,  Align:"Center",  SaveName:"cust_cnt_cd",   KeyField:1, UpdateEdit:1, InsertEdit:1, AcceptKeys:"E",   InputCaseSensitive:1, EditLen:2}, 
+				    {Type:"Popup",     Hidden:0, Width:100, Align:"Center",  SaveName:"cust_seq",      KeyField:1, UpdateEdit:1, InsertEdit:1, AcceptKeys:"N",   EditLen: 6}, 
+				    {Type:"PopupEdit", Hidden:0, Width:100, Align:"Center",  SaveName:"trd_cd",        KeyField:0, UpdateEdit:1, InsertEdit:1, AcceptKeys:"E",   InputCaseSensitive:1, EditLen:3},
 				    {Type:"Combo",     Hidden:0, Width:70,  Align:"Center",  SaveName:"delt_flg",      KeyField:0, UpdateEdit:1, InsertEdit:1, ComboCode:"N|Y",  ComboText:"N|Y"}, 
 				    {Type:"Text",      Hidden:0, Width:200, Align:"Center",  SaveName:"cre_dt",        KeyField:0, UpdateEdit:0, InsertEdit:0}, 
 				    {Type:"Text",      Hidden:0, Width:200, Align:"Left",    SaveName:"cre_usr_id",    KeyField:0, UpdateEdit:0, InsertEdit:0}, 
@@ -422,8 +422,32 @@ function sheet1_OnChange(sheetObj, Row, Col, Value, OldValue, RaiseFlag){
 		}
 	}
 	
-	if(colName == "vndr_seq"){//check exist vendor code
+	if(colName == "jo_crr_cd"){//check exist carrier code
 		formObj.f_cmd.value		= COMMAND02;
+		var sParam				= FormQueryString(formObj) + "&jo_crr_cd=" + Value;
+		var sXml 				= sheetObj.GetSearchData("PRACTICE_4GS.do", sParam, {sync:1});	
+		var flag				= ComGetEtcData(sXml, "ISEXIST");
+		if(flag == 'N'){
+			ComShowCodeMessage("COM130402",["Carrier"]);
+			sheetObj.SetCellValue(Row, Col,OldValue,0);
+			sheetObj.SelectCell(Row, Col);
+		}
+	}
+	
+	if(colName == "rlane_cd"){//check exist carrier code
+		formObj.f_cmd.value		= COMMAND03;
+		var sParam				= FormQueryString(formObj) + "&rlane_cd=" + Value;
+		var sXml 				= sheetObj.GetSearchData("PRACTICE_4GS.do", sParam, {sync:1});	
+		var flag				= ComGetEtcData(sXml, "ISEXIST");
+		if(flag == 'N'){
+			ComShowCodeMessage("COM130402",["Rev. Lane"]);
+			sheetObj.SetCellValue(Row, Col,OldValue,0);
+			sheetObj.SelectCell(Row, Col);
+		}
+	}
+	
+	if(colName == "vndr_seq"){//check exist vendor code
+		formObj.f_cmd.value		= COMMAND04;
 		var sParam				= FormQueryString(formObj) + "&vndr_seq=" + Value;
 		var sXml 				= sheetObj.GetSearchData("PRACTICE_4GS.do", sParam, {sync:1});	
 		var flag				= ComGetEtcData(sXml, "ISEXIST");
@@ -435,7 +459,7 @@ function sheet1_OnChange(sheetObj, Row, Col, Value, OldValue, RaiseFlag){
 	}
 	
 	if(colName == "trd_cd"){//check exist trade code
-		formObj.f_cmd.value     = COMMAND04;
+		formObj.f_cmd.value     = COMMAND05;
 		var sParam              = FormQueryString(formObj) + "&trd_cd=" + Value;
 		var sXml                = sheetObj.GetSearchData("PRACTICE_4GS.do", sParam, {sync:1});
 		var flag                = ComGetEtcData(sXml, "ISEXIST");
@@ -476,7 +500,7 @@ function sheet1_OnPopupClick(sheetObj,Row, Col){
 				// func: func return data to parent window
 				// display: whether column of the grid in popup is hidden (1: visible, 0: invisible) 
 				// bModal: whether the popup is modal (default: false)
-			ComOpenPopup('/opuscntr/COM_ENS_0N1.do', 800, 500, 'setCrrCd', '1,0,0,1,1,1,1,1', true);
+			ComOpenPopup('/opuscntr/	', 800, 500, 'setCrrCd', '1,0,0,1,1,1,1,1', true);
 			break;
 	}
 }

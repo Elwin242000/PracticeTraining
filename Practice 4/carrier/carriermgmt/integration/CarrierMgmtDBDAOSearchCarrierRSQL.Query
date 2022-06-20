@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<querys>
+		<query name="CarrierMgmtDBDAOSearchCarrierRSQL">
+			<desc><![CDATA[DESC Enter..]]></desc>
+			<sql><![CDATA[
+select count(crr_cd)
+from mdm_carrier
+where crr_cd = @[jo_crr_cd]
+    and delt_flg = 'N'			]]></sql>
+			<params>
+				<param name="jo_crr_cd" type="12" value="" out="N"/>
+			</params>
+		</query>
+	</querys>
+</sqls>
